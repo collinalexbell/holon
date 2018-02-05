@@ -2,10 +2,23 @@
 
 (defparameter todo-list '())
 (defparameter selected-todo nil)
+(defparameter global-save-file "current.todo-list")
+
+(defun save-todos (&optional (file-name global-save-file))
+  (with-open-file (*standard-output* file-name :direction :output
+                                               :if-does-not-exist :create
+                                               :if-exists :supersede)
+   (print todo-list)))
+
+(defun load-todos (&optional (file-name global-save-file))
+  (with-open-file (f file-name :direction :input)
+    (setf todo-list (read f))))
 
 (defun add-todo (item)
   (setf todo-list
-   (cons item todo-list)))
+        (cons item todo-list))
+  (save-todos)
+  (todos))
 
 
 (defun complete-todo (item)
@@ -15,6 +28,7 @@
 (defun complete ()
   (complete-todo selected-todo)
   (setf selected-todo nil)
+  (save-todos)
   (todos))
 
 
