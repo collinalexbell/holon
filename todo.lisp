@@ -1,8 +1,15 @@
 ;;;; Todo lists are the most important orginzational tool to get things done
+(load "../timer.lisp")
+(defpackage :todo
+  (:use :timer
+        :cl))
+
+
+(in-package :todo)
 
 (defparameter todo-list '())
 (defparameter selected-todo nil)
-(defparameter global-save-file "current.todo-list")
+(defparameter global-save-file "../current.todo-list")
 
 (defun save-todos (&optional (file-name global-save-file))
   (with-open-file (*standard-output* file-name :direction :output
@@ -60,10 +67,17 @@
              do (format t "~a) ~a~%~%" i todo))
        (format t "-----</TODO List>-----~%"))))
 
+(defun remind (n sec min hour)
+  (labels ((play-sound ()
+             (inferior-shell:run/nil '(afplay "/Users/taggart/Downloads/light.mp3")))
+           (reminder ()
+             (format t "~%YOU NEED TO ~a~%" (nth n todo-list))
+             (make-thread play-sound)))
+    (schedule-today #'reminder sec min hour)))
 
 (defun print-todo-menu ()
   (format t "~%-----<COMMANDS>-------~%~%")
-  (format t "SELECT <#> | COMPLETE | DESELECT~%")
+  (format t "SELECT <#> | COMPLETE | DESELECT | REMIND <#> <SEC> <MIN> <HOUR>~%")
   (format t "~%-----</COMMANDS>------~%~%"))
 
 (defun todos ()
