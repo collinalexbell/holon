@@ -1,4 +1,5 @@
 ;;;; Todo lists are the most important orginzational tool to get things done
+(ql:quickload :inferior-shell)
 (load "../timer.lisp")
 (defpackage :todo
   (:use :timer
@@ -72,7 +73,7 @@
              (inferior-shell:run/nil '(afplay "/Users/taggart/Downloads/light.mp3")))
            (reminder ()
              (format t "~%YOU NEED TO ~a~%" (nth n todo-list))
-             (make-thread play-sound)))
+             (make-thread #'play-sound)))
     (schedule-today #'reminder sec min hour)))
 
 (defun print-todo-menu ()
