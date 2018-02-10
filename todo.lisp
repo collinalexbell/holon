@@ -1,6 +1,6 @@
 ;;;; Todo lists are the most important orginzational tool to get things done
 (ql:quickload :inferior-shell)
-(load "../timer.lisp")
+(load "timer.lisp")
 
 (defpackage :todo
   (:use :timer :cl))
@@ -10,8 +10,8 @@
 
 (defparameter todo-list '())
 (defparameter selected-todo nil)
-(defparameter global-save-file "../current.todo-list")
-(defparameter morning-template "morning.todo-template")
+(defparameter global-save-file "current.todo-list")
+(defparameter morning-template "todo/morning.todo-template")
 
 (defun save-todos (&optional (file-name global-save-file))
   (with-open-file (*standard-output* file-name :direction :output
@@ -23,9 +23,12 @@
   (with-open-file (f file-name :direction :input)
     (setf todo-list (read f))))
 
-(defun add-todo (item)
-  (setf todo-list
-        (cons item todo-list))
+(defun add-todo (item &optional (priority 0))
+        (push
+         (cons (cons 'priority priority)
+               (list item))
+         todo-list)
+  (setf todo-list (sort-by-priority todo-list))
   (save-todos)
   (todos))
 
@@ -34,6 +37,16 @@
     (setf todo-list
           (concatenate 'list (read f) todo-list)))
   (todos))
+
+(defun get-priority (todo)
+  (or (and (listp (car todo))
+           (cdr (assoc 'priority todo)))
+      0))
+
+(defun sort-by-priority (l)
+  (sort l
+        (lambda (a b) (> (get-priority a)
+                         (get-priority b)))))
 
 
 (defun complete-todo (item)
