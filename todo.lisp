@@ -12,6 +12,7 @@
 (defparameter selected-todo nil)
 (defparameter global-save-file "current.todo-list")
 (defparameter morning-template "todo/morning.todo-template")
+(defparameter sleep-template "todo/sleep.todo-template")
 
 (defun save-todos (&optional (file-name global-save-file))
   (with-open-file (*standard-output* file-name :direction :output
@@ -23,7 +24,7 @@
   (with-open-file (f file-name :direction :input)
     (setf todo-list (read f))))
 
-(defun add-todo (item &optional (priority 0))
+(defun add-todo (item priority)
         (push
          (cons (cons 'priority priority)
                (list item))
@@ -34,14 +35,12 @@
 
 (defun add-templated-todos (fname)
   (with-open-file (f fname :direction :input)
-    (setf todo-list
-          (concatenate 'list (read f) todo-list)))
+          (loop for todo in (read f)
+                do (push `((priority . 9001) ,todo) todo-list)))
   (todos))
 
-(defun get-priority (todo)
-  (or (and (listp (car todo))
-           (cdr (assoc 'priority todo)))
-      0))
+(defmacro get-priority (todo)
+  `(cdr (assoc 'priority ,todo)))
 
 (defun sort-by-priority (l)
   (sort l
@@ -59,6 +58,10 @@
   (save-todos)
   (todos))
 
+(defun adjust-priority (index priority)
+   (setf
+     (get-priority (nth index todo-list))
+    priority))
 
 (defun select-todo (item)
   (if (find item todo-list :test #'equal)
@@ -69,7 +72,7 @@
   (setf selected-todo nil)
   (todos))
 
-(defun select (index)
+(defun select (&optional (index 0))
   (let ((todo (nth index todo-list)))
     (select-todo todo))
   (todos))
