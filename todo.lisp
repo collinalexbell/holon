@@ -13,6 +13,20 @@
 (defparameter global-save-file "current.todo-list")
 (defparameter morning-template "todo/morning.todo-template")
 (defparameter sleep-template "todo/sleep.todo-template")
+(defparameter test-template "todo/small.todo-template")
+
+(defclass todo ()
+  ((description :accessor todo-description
+                :initarg :description)
+   (priority :accessor todo-priority
+             :initarg :priority
+             :initform 0)))
+
+(defun list->todos (l)
+  (if (listp (caar l))
+      (loop for t-d in l collect (make-instance 'todo :description (cadr t-d)
+                                                      :priority (cdr (assoc 'priority t-d))))
+      (loop for t-d in l collect (make-instance 'todo :description t-d))))
 
 (defun save-todos (&optional (file-name global-save-file))
   (with-open-file (*standard-output* file-name :direction :output
@@ -26,8 +40,7 @@
 
 (defun add-todo (item priority)
         (push
-         (cons (cons 'priority priority)
-               (list item))
+         (make-instance 'todo :description item :priority priority)
          todo-list)
   (setf todo-list (sort-by-priority todo-list))
   (save-todos)
@@ -36,7 +49,10 @@
 (defun add-templated-todos (fname)
   (with-open-file (f fname :direction :input)
           (loop for todo in (read f)
-                do (push `((priority . 9001) ,todo) todo-list)))
+                do (push (make-instance 'todo
+                                        :description todo
+                                        :priority 9001)
+                         todo-list)))
   (todos))
 
 (defmacro get-priority (todo)
@@ -61,7 +77,8 @@
 (defun adjust-priority (index priority)
    (setf
      (get-priority (nth index todo-list))
-    priority))
+     priority)
+  (setf todo-list (sort-by-priority todo-list)))
 
 (defun select-todo (item)
   (if (find item todo-list :test #'equal)
@@ -80,7 +97,7 @@
 (defun print-current-todo ()
   (if selected-todo
       (format t "-----<Current TODO>---~%~a~%-----</Current TODO>--~%~%"
-              selected-todo)))
+              (todo-description selected-todo))))
 
 (defun print-todo-list ()
   (if todo-list
@@ -88,7 +105,9 @@
        (format t "-----<TODO List>------~%~%")
        (loop for todo in todo-list
              for i from 0 to (length todo-list)
-             do (format t "~a) ~a~%~%" i todo))
+             do (format t "~a) ~dXP: ~a ~%~%" i
+                        (todo-priority todo)
+                        (todo-description todo)))
        (format t "-----</TODO List>-----~%"))))
 
 (defun remind (n sec min hour &optional (tomorrow nil))
