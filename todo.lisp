@@ -11,6 +11,7 @@
 
 (defparameter todo-list '())
 (defparameter selected-todo nil)
+(defparameter selected-group 'all)
 (defparameter global-save-file "current.todo-list")
 (defparameter morning-template "todo/morning.todo-template")
 (defparameter sleep-template "todo/sleep.todo-template")
@@ -21,7 +22,10 @@
                 :initarg :description)
    (priority :accessor todo-priority
              :initarg :priority
-             :initform 0)))
+             :initform 0)
+   (groups :accessor todo-groups
+           :initarg :groups
+           :initform 0)))
 
 (defun list->todos (l)
   (if (listp (caar l))
@@ -35,9 +39,9 @@
 (defun load-todos (&optional (file-name global-save-file))
   (setf todo-list (cl-store:restore file-name)))
 
-(defun add-todo (item priority)
+(defun add-todo (item &key (priority 0) (groups '(all)))
         (push
-         (make-instance 'todo :description item :priority priority)
+         (make-instance 'todo :description item :priority priority :groups groups)
          todo-list)
   (setf todo-list (sort-by-priority todo-list))
   (save-todos)
@@ -74,6 +78,11 @@
      priority)
   (setf todo-list (sort-by-priority todo-list)))
 
+(defun filter-todos-by-group (l g)
+  (remove-if-not (lambda (t-d)
+                   (find g (todo-groups t-d)))
+                 l))
+
 (defun select-todo (item)
   (if (find item todo-list :test #'equal)
       (setf selected-todo item)
@@ -96,13 +105,13 @@
 (defun print-todo-list ()
   (if todo-list
       (progn
-       (format t "-----<TODO List>------~%~%")
-       (loop for todo in todo-list
+       (format t "-----<TODO List (~a)>------~%~%" selected-group)
+       (loop for todo in  (filter-todos-by-group todo-list selected-group)
              for i from 0 to (length todo-list)
              do (format t "~a) ~dXP: ~a ~%~%" i
                         (todo-priority todo)
                         (todo-description todo)))
-       (format t "-----</TODO List>-----~%"))))
+       (format t "-----</TODO List (~a)>-----~%" selected-group))))
 
 (defun remind (n sec min hour &optional (tomorrow nil))
   (let ((todo (nth n todo-list)))
