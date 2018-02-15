@@ -1,5 +1,6 @@
 ;;;; Todo lists are the most important orginzational tool to get things done
 (ql:quickload :inferior-shell)
+(ql:quickload :cl-store)
 (load "timer.lisp")
 
 (defpackage :todo
@@ -29,14 +30,10 @@
       (loop for t-d in l collect (make-instance 'todo :description t-d))))
 
 (defun save-todos (&optional (file-name global-save-file))
-  (with-open-file (*standard-output* file-name :direction :output
-                                               :if-does-not-exist :create
-                                               :if-exists :supersede)
-   (print todo-list)))
+  (cl-store:store todo-list file-name))
 
 (defun load-todos (&optional (file-name global-save-file))
-  (with-open-file (f file-name :direction :input)
-    (setf todo-list (read f))))
+  (setf todo-list (cl-store:restore file-name)))
 
 (defun add-todo (item priority)
         (push
