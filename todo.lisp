@@ -39,10 +39,11 @@
 (defun load-todos (&optional (file-name global-save-file))
   (setf todo-list (cl-store:restore file-name)))
 
-(defun add-todo (item &key (priority 0) (groups '(all)))
-        (push
-         (make-instance 'todo :description item :priority priority :groups groups)
-         todo-list)
+(defun add-todo (item &key (priority 0) (groups '()))
+  (push 'all groups)
+  (push
+   (make-instance 'todo :description item :priority priority :groups groups)
+   todo-list)
   (setf todo-list (sort-by-priority todo-list))
   (save-todos)
   (todos))
@@ -74,9 +75,22 @@
 
 (defun adjust-priority (index priority)
    (setf
-     (get-priority (nth index todo-list))
+    (get-priority (nth index (filter-todos-by-group todo-list selected-group)))
      priority)
   (setf todo-list (sort-by-priority todo-list)))
+
+
+(defun current-groups ()
+  (let ((current-groups '()))
+    (loop for todo in todo-list
+          do (loop for group in (todo-groups todo)
+                   do (setf current-groups
+                            (adjoin group current-groups))))
+    current-groups))
+
+(defun select-group (index)
+  (setf selected-group (nth index (current-groups)))
+  (todos))
 
 (defun filter-todos-by-group (l g)
   (remove-if-not (lambda (t-d)
@@ -93,7 +107,7 @@
   (todos))
 
 (defun select (&optional (index 0))
-  (let ((todo (nth index todo-list)))
+  (let ((todo (nth index (filter-todos-by-group todo-list selected-group))))
     (select-todo todo))
   (todos))
 
@@ -114,7 +128,7 @@
        (format t "-----</TODO List (~a)>-----~%" selected-group))))
 
 (defun remind (n sec min hour &optional (tomorrow nil))
-  (let ((todo (nth n todo-list)))
+  (let ((todo (nth n (filter-todos-by-group todo-list selected-group))))
    (labels ((play-sound ()
               (inferior-shell:run/nil '(afplay "/Users/taggart/Downloads/light.mp3")))
             (reminder ()
@@ -125,12 +139,25 @@
          (schedule-today #'reminder sec min hour)))))
 
 (defun print-todo-menu ()
-  (format t "~%-----<COMMANDS>-------~%~%")
-  (format t "SELECT <#> | COMPLETE | DESELECT | REMIND <#> <SEC> <MIN> <HOUR>~%")
-  (format t "~%-----</COMMANDS>------~%~%"))
+  (format t "~%----------------------------<COMMANDS>-----------------------------~%~%")
+  (format t "SELECT <#> |     COMPLETE    | DESELECT | REMIND <#> <SEC> <MIN> <HOUR>~%")
+  (format t "-----------------------------------------------------------------------~%")
+  (format t "GROUPS     | SELECT-GROUP <#>")
+  (format t "~%----------------------------<COMMANDS>-----------------------------~%~%"))
+
+(defun print-current-groups ()
+  (format t "-----<Groups>-----~%~%")
+  (let ((current-groups (current-groups)))
+    (loop for group in current-groups
+         for i from 0 to (length current-groups)
+          do (format t "~d) ~a~%" i group)))
+
+  (format t "~%-----</Groups>-----~%~%"))
 
 (defun todos ()
   (print-current-todo)
   (print-todo-list)
   (print-todo-menu))
 
+(defun groups ()
+  (print-current-groups))
