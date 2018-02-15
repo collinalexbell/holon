@@ -55,13 +55,10 @@
                          todo-list)))
   (todos))
 
-(defmacro get-priority (todo)
-  `(cdr (assoc 'priority ,todo)))
-
 (defun sort-by-priority (l)
   (sort l
-        (lambda (a b) (> (get-priority a)
-                         (get-priority b)))))
+        (lambda (a b) (> (todo-priority a)
+                         (todo-priority b)))))
 
 
 (defun complete-todo (item)
