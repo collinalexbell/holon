@@ -1,4 +1,7 @@
 (defun complete ()
+  (accumulate-work-time selected-todo)
+  (format t "You spent ~d seconds in total working on this todo~%"
+          (todo-selected-duration selected-todo))
   (complete-todo selected-todo)
   (setf selected-todo nil)
   (save-todos)
@@ -9,12 +12,15 @@
   (todos))
 
 (defun deselect ()
+  (let ((accumulated-time (accumulate-work-time selected-todo)))
+    (format t "You just spent ~d seconds on this incomplete todo.~%" accumulated-time))
   (setf selected-todo nil)
   (todos))
 
 (defun select (&optional (index 0))
   (let ((todo (nth index (filter-todos-by-group todo-list selected-group))))
-    (select-todo todo))
+    (select-todo todo)
+    (setf (last-selected-time todo) (get-universal-time)))
   (todos))
 
 (defun todos ()
@@ -35,4 +41,5 @@
       (if tomorrow
           (schedule-tomorrow #'reminder sec min hour)
           (schedule-today #'reminder sec min hour)))))
+
 
