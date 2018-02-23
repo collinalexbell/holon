@@ -24,7 +24,6 @@
 ;;filter-todos-by-group
 ;;current-groups
 
-(load "todo/menu.lisp")
 
 ;;;;PRINTING;;;;
 (load "todo/printing.lisp")
