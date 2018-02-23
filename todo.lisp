@@ -6,16 +6,9 @@
 (defpackage :todo
   (:use :timer :cl))
 
+(load "todo/globals.lisp")
 
 (in-package :todo)
-
-(defparameter todo-list '())
-(defparameter selected-todo nil)
-(defparameter selected-group 'all)
-(defparameter global-save-file "current.todo-list")
-(defparameter morning-template "todo/morning.todo-template")
-(defparameter sleep-template "todo/sleep.todo-template")
-(defparameter test-template "todo/small.todo-template")
 
 (defclass todo ()
   ((description :accessor todo-description
@@ -51,10 +44,7 @@
 (defun add-templated-todos (fname)
   (with-open-file (f fname :direction :input)
           (loop for todo in (read f)
-                do (push (make-instance 'todo
-                                        :description todo
-                                        :priority 9001)
-                         todo-list)))
+                do (add-todo todo :priority 9001)))
   (todos))
 
 (defun sort-by-priority (l)
@@ -120,7 +110,7 @@
   (if todo-list
       (progn
        (format t "-----<TODO List (~a)>------~%~%" selected-group)
-       (loop for todo in  (filter-todos-by-group todo-list selected-group)
+       (loop for todo in (filter-todos-by-group todo-list selected-group)
              for i from 0 to (length todo-list)
              do (format t "~a) ~dXP: ~a ~%~%" i
                         (todo-priority todo)
