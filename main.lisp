@@ -34,13 +34,6 @@
   (save-todos)
   (todos))
 
-(defun adjust-priority (index priority)
-   (setf
-    (get-priority (nth index (filter-todos-by-group todo-list selected-group)))
-     priority)
-  (setf todo-list (sort-by-priority todo-list)))
-
-
 (defun current-groups ()
   (let ((current-groups '()))
     (loop for todo in todo-list
