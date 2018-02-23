@@ -9,7 +9,7 @@
         (format t "-----<TODO List (~a)>------~%~%" selected-group)
         (loop for todo in (filter-todos-by-group todo-list selected-group)
               for i from 0 to (length todo-list)
-              do (format t "~a) ~dXP: ~a ~%~%" i
+              do (format t "~a) ~dXP: ~a ~%" i
                          (todo-priority todo)
                          (todo-description todo)))
         (format t "-----</TODO List (~a)>-----~%" selected-group))))
