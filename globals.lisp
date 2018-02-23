@@ -1,5 +1,3 @@
-(in-package :todo)
-
 (defparameter todo-list '())
 (defparameter selected-todo nil)
 (defparameter selected-group 'all)

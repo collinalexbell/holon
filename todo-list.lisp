@@ -42,3 +42,9 @@
                             (adjoin group current-groups))))
     current-groups))
 
+
+(defun select-todo (item)
+  (if (find item todo-list :test #'equal)
+      (setf selected-todo item)
+      (format t "Item does not exist in todo list")))
+
