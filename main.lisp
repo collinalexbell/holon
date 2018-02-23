@@ -9,15 +9,8 @@
 
 (in-package :todo)
 
-(defclass todo ()
-  ((description :accessor todo-description
-                :initarg :description)
-   (priority :accessor todo-priority
-             :initarg :priority
-             :initform 0)
-   (groups :accessor todo-groups
-           :initarg :groups
-           :initform 0)))
+(load "todo/todo.lisp")
+;;class todo
 
 ;;;;TODO-LIST FNS;;;;;
 (load "todo/todo-list.lisp")
@@ -27,6 +20,8 @@
 ;;add-todo
 ;;load-todos
 ;;save-todos
+;;filter-todos-by-group
+;;current-groups
 
 (defun complete ()
   (complete-todo selected-todo)
@@ -34,22 +29,9 @@
   (save-todos)
   (todos))
 
-(defun current-groups ()
-  (let ((current-groups '()))
-    (loop for todo in todo-list
-          do (loop for group in (todo-groups todo)
-                   do (setf current-groups
-                            (adjoin group current-groups))))
-    current-groups))
-
 (defun select-group (index)
   (setf selected-group (nth index (current-groups)))
   (todos))
-
-(defun filter-todos-by-group (l g)
-  (remove-if-not (lambda (t-d)
-                   (find g (todo-groups t-d)))
-                 l))
 
 (defun select-todo (item)
   (if (find item todo-list :test #'equal)

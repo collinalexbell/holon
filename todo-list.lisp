@@ -28,3 +28,17 @@
   (setf todo-list
         (delete item todo-list :test #'equal)))
 
+(defun filter-todos-by-group (l g)
+  (remove-if-not (lambda (t-d)
+                   (find g (todo-groups t-d)))
+                 l))
+
+
+(defun current-groups ()
+  (let ((current-groups '()))
+    (loop for todo in todo-list
+          do (loop for group in (todo-groups todo)
+                   do (setf current-groups
+                            (adjoin group current-groups))))
+    current-groups))
+
