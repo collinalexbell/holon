@@ -20,12 +20,6 @@
            :initarg :groups
            :initform 0)))
 
-(defun list->todos (l)
-  (if (listp (caar l))
-      (loop for t-d in l collect (make-instance 'todo :description (cadr t-d)
-                                                      :priority (cdr (assoc 'priority t-d))))
-      (loop for t-d in l collect (make-instance 'todo :description t-d))))
-
 (defun save-todos (&optional (file-name global-save-file))
   (cl-store:store todo-list file-name))
 
