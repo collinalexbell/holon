@@ -43,3 +43,13 @@
           (schedule-tomorrow #'reminder sec min hour)
           (schedule-today #'reminder sec min hour)))))
 
+
+(defun add-group (group)
+  (if (not (find group group-list))
+      (push group group-list)))
+
+
+(defun delete-group (group)
+  (if (find group (groups-in-todo-list))
+      (error "This group cannot be deleted because a live todo is in it"))
+  (delete group group-list))

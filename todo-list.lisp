@@ -6,6 +6,12 @@
 
 (defun add-todo (item &key (priority 0) (groups '()))
   (push 'all groups)
+  (if (not (eq selected-group 'all))
+      (progn
+        (push selected-group groups)
+        (loop for group in groups
+              do (if (not (find group group-list))
+                      (push group group-list)))))
   (push
    (make-instance 'todo :description item :priority priority :groups groups)
    todo-list)
@@ -33,8 +39,9 @@
                    (find g (todo-groups t-d)))
                  l))
 
+(defun current-groups () group-list)
 
-(defun current-groups ()
+(defun groups-in-todo-list ()
   (let ((current-groups '()))
     (loop for todo in todo-list
           do (loop for group in (todo-groups todo)
@@ -42,9 +49,9 @@
                             (adjoin group current-groups))))
     current-groups))
 
-
 (defun select-todo (item)
   (if (find item todo-list :test #'equal)
       (setf selected-todo item)
       (format t "Item does not exist in todo list")))
+
 
