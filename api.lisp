@@ -31,6 +31,7 @@
 (defun groups ()
   (print-current-groups))
 
+
 (defun remind (n sec min hour &optional (tomorrow nil))
   (let ((todo (nth n (filter-todos-by-group todo-list selected-group))))
     (labels ((play-sound ()
@@ -41,5 +42,4 @@
       (if tomorrow
           (schedule-tomorrow #'reminder sec min hour)
           (schedule-today #'reminder sec min hour)))))
-
 
