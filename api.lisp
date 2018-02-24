@@ -7,9 +7,24 @@
   (save-todos)
   (todos))
 
-(defun select-group (index)
-  (setf selected-group (nth index (current-groups)))
-  (todos))
+(defun select-group (group)
+  (cond
+    ((integerp group) (setf selected-group (nth group (current-groups))))
+    ((symbolp group) (if (find group (current-groups)) (setf selected-group group)
+                         (error "That group doesn't exist")))
+    (t (error "Group is not of type integer or symbol"))))
+
+(define-test select-group-test
+  (define-test select-group-by-integer-test
+    (let ((selected-group nil))
+      (select-group (- (length group-list) 1))
+      (true (eq selected-group 'all))))
+  (define-test select-group-symbol-test
+    (let ((selected-group nil))
+      (select-group 'all)
+      (true (eq selected-group 'all))))
+  (define-test select-group-error-test
+    (fail (select-group "winning"))))
 
 (defun deselect ()
   (let ((accumulated-time (accumulate-work-time selected-todo)))
