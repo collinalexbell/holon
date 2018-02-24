@@ -1,3 +1,10 @@
+
+(defun save-groups (&optional (file-name global-group-file))
+  (cl-store:store group-list file-name))
+
+(defun load-groups (&optional (file-name global-group-file))
+  (setf group-list (cl-store:restore file-name)))
+
 (defun save-todos (&optional (file-name global-save-file))
   (cl-store:store todo-list file-name))
 
@@ -11,7 +18,7 @@
         (push selected-group groups)
         (loop for group in groups
               do (if (not (find group group-list))
-                      (push group group-list)))))
+                      (add-group group)))))
   (push
    (make-instance 'todo :description item :priority priority :groups groups)
    todo-list)

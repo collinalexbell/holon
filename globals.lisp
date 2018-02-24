@@ -6,4 +6,5 @@
 (defparameter morning-template "todo/morning.todo-template")
 (defparameter sleep-template "todo/sleep.todo-template")
 (defparameter test-template "todo/small.todo-template")
+(defparameter global-group-file "todo/groups.list")
 
