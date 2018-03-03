@@ -1,3 +1,10 @@
+(defun remove-nth (n list)
+  (declare
+   (type (integer 0) n)
+   (type list list))
+  (if (or (zerop n) (null list))
+      (cdr list)
+      (cons (car list) (remove-nth (1- n) (cdr list)))))
 
 (defun save-groups (&optional (file-name global-group-file))
   (cl-store:store group-list file-name))
@@ -7,6 +14,9 @@
 
 (defun save-todos (&optional (file-name global-save-file))
   (cl-store:store todo-list file-name))
+
+(defun delete-todos (&rest indicies)
+  (loop for i in indicies do (setf todo-list (remove-nth i todo-list))))
 
 (defun load-todos (&optional (file-name global-save-file))
   (setf todo-list (cl-store:restore file-name)))

@@ -17,3 +17,5 @@
   (let ((time-diff (- (get-universal-time) (last-selected-time the-todo))))
       (setf (todo-selected-duration the-todo)
          (+ (todo-selected-duration the-todo) time-diff))))
+
+
