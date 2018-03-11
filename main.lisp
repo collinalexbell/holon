@@ -15,3 +15,6 @@
 (load "todo/printing.lisp")
 (load "todo/api.lisp")
 
+
+(defun run-all-package-tests ()
+  (test 'select-group-test))
