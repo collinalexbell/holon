@@ -15,40 +15,44 @@
 (defun save-todos (&optional (file-name global-save-file))
   (cl-store:store todo-list file-name))
 
+(defun save-and-redisplay ()
+  (save-todos)
+  (todos))
+
 (defun delete-todos (&rest indicies)
   (loop for i in indicies do (setf todo-list (remove-nth i todo-list))))
 
 (defun load-todos (&optional (file-name global-save-file))
   (setf todo-list (cl-store:restore file-name)))
 
-(defun add-groups-to-list (groups)
+(defun add-new-groups-to-group-list (groups)
   (loop for group in groups
         do (if (not (find group group-list))
                (add-group group))))
 
-(defun add-todo (item &key (priority 0) (groups '()))
-  (push 'all groups)
-  (if (not (eq selected-group 'all))
-      (progn
-        (push selected-group groups)))
-  (add-groups-to-list groups)
-  (push
-   (make-instance 'todo :description item :priority priority :groups groups)
-   todo-list)
-  (setf todo-list (sort-by-priority todo-list))
-  (save-todos)
-  (todos))
+(defun push-todo-and-re-sort (todo-instance)
+  (push todo-instance todo-list)
+  (setf todo-list (sort-by-priority todo-list)))
+
+(defun add-todo (item &key (priority 0) (todo-groups '()))
+  (push 'all todo-groups)
+  (if (not (eq selected-group 'all)) (push selected-group todo-groups))
+  (add-new-groups-to-group-list todo-groups)
+  (push-todo-and-re-sort
+   (make-instance 'todo :description item :priority priority :groups todo-groups))
+  (save-and-redisplay))
 
 (define-test add-todo-test
   (let ((todo-list '())
         (group-list '()))
-   (add-todo '(all i do is test) :groups '(test))
-   (true (find 'test group-list))))
+    (add-todo '(all i do is test) :todo-groups '(test))
+    (true (find 'test group-list))
+    (true (= 1 (length todo-list)))))
 
 (defun add-templated-todos (fname)
   (with-open-file (f fname :direction :input)
     (loop for todo in (read f)
-          do (add-todo todo :priority 9001 :groups '(templated))))
+          do (add-todo todo :priority 9001 :todo-groups '(templated))))
   (todos))
 
 (defun sort-by-priority (l)
