@@ -39,7 +39,7 @@
 (defun add-templated-todos (fname)
   (with-open-file (f fname :direction :input)
     (loop for todo in (read f)
-          do (add-todo todo :priority 9001)))
+          do (add-todo todo :priority 9001 :groups '(templated))))
   (todos))
 
 (defun sort-by-priority (l)
