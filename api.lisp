@@ -4,8 +4,7 @@
           (todo-selected-duration selected-todo))
   (complete-todo selected-todo)
   (setf selected-todo nil)
-  (save-todos)
-  (todos))
+  (save-and-redisplay))
 
 (defun select-group (group)
   (cond
