@@ -21,20 +21,29 @@
 (defun load-todos (&optional (file-name global-save-file))
   (setf todo-list (cl-store:restore file-name)))
 
+(defun add-groups-to-list (groups)
+  (loop for group in groups
+        do (if (not (find group group-list))
+               (add-group group))))
+
 (defun add-todo (item &key (priority 0) (groups '()))
   (push 'all groups)
   (if (not (eq selected-group 'all))
       (progn
-        (push selected-group groups)
-        (loop for group in groups
-              do (if (not (find group group-list))
-                      (add-group group)))))
+        (push selected-group groups)))
+  (add-groups-to-list groups)
   (push
    (make-instance 'todo :description item :priority priority :groups groups)
    todo-list)
   (setf todo-list (sort-by-priority todo-list))
   (save-todos)
   (todos))
+
+(define-test add-todo-test
+  (let ((todo-list '())
+        (group-list '()))
+   (add-todo '(all i do is test) :groups '(test))
+   (true (find 'test group-list))))
 
 (defun add-templated-todos (fname)
   (with-open-file (f fname :direction :input)
