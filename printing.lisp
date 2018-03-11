@@ -1,18 +1,18 @@
 (defun print-current-todo ()
-  (if selected-todo
+  (if *selected-todo*
       (format t "-----<Current TODO>---~%~a~%-----</Current TODO>--~%~%"
-              (todo-description selected-todo))))
+              (todo-description *selected-todo*))))
 
 (defun print-todo-list ()
-  (if todo-list
+  (if *todo-list*
       (progn
-        (format t "-----<TODO List (~a)>------~%~%" selected-group)
-        (loop for todo in (filter-todos-by-group todo-list selected-group)
-              for i from 0 to (length todo-list)
+        (format t "-----<TODO List (~a)>------~%~%" *selected-group*)
+        (loop for todo in (filter-todos-by-group *todo-list* *selected-group*)
+              for i from 0 to (length *todo-list*)
               do (format t "~a) ~dXP: ~a ~%" i
                          (todo-priority todo)
                          (todo-description todo)))
-        (format t "-----</TODO List (~a)>-----~%" selected-group))))
+        (format t "-----</TODO List (~a)>-----~%" *selected-group*))))
 
 (defun print-current-groups ()
   (format t "-----<Groups>-----~%~%")
