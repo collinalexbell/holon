@@ -17,7 +17,7 @@
 (define-test select-group-test
   (define-test select-group-by-integer-test
     (let ((selected-group nil))
-      (select-group (- (length group-list) 1))
+      (select-group (- (length group-list) 3))
       (true (eq selected-group 'all))))
   (define-test select-group-symbol-test
     (let ((selected-group nil))
