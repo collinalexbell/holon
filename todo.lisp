@@ -19,3 +19,8 @@
          (+ (todo-selected-duration the-todo) time-diff))))
 
 
+
+(defun add-todos (&optional (todos '()))
+  ;;todos is a list of todos
+  (loop for todo in todos
+   do (add-todo todo)))
