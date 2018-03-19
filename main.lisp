@@ -5,7 +5,7 @@
 (load "timer.lisp")
 
 (defpackage :todo
-  (:use :timer :cl :parachute))
+  (:use :timer :cl :parachute :core))
 
 (in-package :todo)
 

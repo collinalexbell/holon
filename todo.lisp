@@ -24,3 +24,7 @@
   ;;todos is a list of todos
   (loop for todo in todos
    do (add-todo todo)))
+
+(defun say-selected-todo ()
+  (let ((words (format nil "~a" (todo-description *selected-todo*))))
+   (say words)))

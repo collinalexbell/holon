@@ -34,7 +34,8 @@
 (defun select (&optional (index 0))
   (let ((todo (nth index (filter-todos-by-group *todo-list* *selected-group*))))
     (select-todo todo)
-    (setf (last-selected-time todo) (get-universal-time)))
+    (setf (last-selected-time todo) (get-universal-time))
+    (say-selected-todo))
   (todos))
 
 (defun todos ()
