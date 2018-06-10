@@ -16,7 +16,8 @@
 (defun accumulate-work-time (the-todo)
   (let ((time-diff (- (get-universal-time) (last-selected-time the-todo))))
       (setf (todo-selected-duration the-todo)
-         (+ (todo-selected-duration the-todo) time-diff))))
+            (+ (todo-selected-duration the-todo) time-diff))
+    (values (todo-selected-duration the-todo) time-diff)))
 
 
 
@@ -27,4 +28,4 @@
 
 (defun say-selected-todo ()
   (let ((words (format nil "~a" (todo-description *selected-todo*))))
-   (say words)))
+   (progn words nil)))

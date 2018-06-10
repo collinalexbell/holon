@@ -5,15 +5,16 @@
 (load "timer.lisp")
 
 (defpackage :todo
-  (:use :timer :cl :parachute :core))
+  (:use :cl :parachute :postmodern)
+  (:export :select :complete :deselect))
 
 (in-package :todo)
 
-(load "todo/globals.lisp")
-(load "todo/todo.lisp")
-(load "todo/todo-list.lisp")
-(load "todo/printing.lisp")
-(load "todo/api.lisp")
+(load "alexander.todo/globals.lisp")
+(load "alexander.todo/todo.lisp")
+(load "alexander.todo/todo-list.lisp")
+(load "alexander.todo/printing.lisp")
+(load "alexander.todo/api.lisp")
 
 
 (defun run-all-package-tests ()

@@ -2,6 +2,7 @@
   (accumulate-work-time *selected-todo*)
   (format t "You spent ~d seconds in total working on this todo~%"
           (todo-selected-duration *selected-todo*))
+  (save-completed-todo *selected-todo*)
   (complete-todo *selected-todo*)
   (setf *selected-todo* nil)
   (save-and-redisplay))
@@ -26,10 +27,10 @@
     (fail (select-group "winning"))))
 
 (defun deselect ()
-  (let ((accumulated-time (accumulate-work-time *selected-todo*)))
-    (format t "You just spent ~d seconds on this incomplete todo.~%" accumulated-time))
-  (setf *selected-todo* nil)
-  (todos))
+  (multiple-value-bind (accumulated-time time-diff) (accumulate-work-time *selected-todo*)
+    (format t "You just spent ~d seconds on this incomplete todo, for a total of ~d ~%" time-diff accumulated-time)
+    (setf *selected-todo* nil)
+    time-diff))
 
 (defun select (&optional (index 0))
   (let ((todo (nth index (filter-todos-by-group *todo-list* *selected-group*))))
@@ -45,18 +46,6 @@
 
 (defun groups ()
   (print-current-groups))
-
-
-(defun remind (n sec min hour &optional (tomorrow nil))
-  (let ((todo (nth n (filter-todos-by-group *todo-list* *selected-group*))))
-    (labels ((play-sound ()
-               (inferior-shell:run/nil '(afplay "/Users/taggart/Downloads/light.mp3")))
-             (reminder ()
-               (format t "~%YOU NEED TO ~a~%" todo)
-               (sb-thread:make-thread #'play-sound)))
-      (if tomorrow
-          (schedule-tomorrow #'reminder sec min hour)
-          (schedule-today #'reminder sec min hour)))))
 
 
 (defun add-group (group)
