@@ -1,11 +1,11 @@
 (defun complete ()
-  (accumulate-work-time *selected-todo*)
   (format t "You spent ~d seconds in total working on this todo~%"
           (todo-selected-duration *selected-todo*))
-  (save-completed-todo *selected-todo*)
   (complete-todo *selected-todo*)
-  (setf *selected-todo* nil)
   (save-and-redisplay))
+
+(defun delete-selected ()
+  (delete-todo *selected-todo*))
 
 (defun select-group (group)
   (cond

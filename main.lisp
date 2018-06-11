@@ -1,8 +1,7 @@
 (ql:quickload :inferior-shell)
 (ql:quickload :cl-store)
 (ql:quickload :parachute)
-
-(load "timer.lisp")
+(ql:quickload :postmodern)
 
 (defpackage :todo
   (:use :cl :parachute :postmodern)

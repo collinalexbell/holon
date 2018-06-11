@@ -61,6 +61,14 @@
                          (todo-priority b)))))
 
 (defun complete-todo (item)
+  (accumulate-work-time *selected-todo*)
+  (save-completed-todo *selected-todo*)
+  (setf *selected-todo* nil)
+  (setf *todo-list*
+        (delete item *todo-list* :test #'equal)))
+
+(defun delete-todo (item)
+  (setf *selected-todo* nil)
   (setf *todo-list*
         (delete item *todo-list* :test #'equal)))
 
