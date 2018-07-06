@@ -11,7 +11,8 @@
 
 (defun run-all-package-tests ()
   (test 'select-group-test)
-  (test 'add-todo-test))
+  (test 'add-todo-test)
+  (test 'find-todo-test))
 
 (defun init ()
   (load "todo/globals.lisp")

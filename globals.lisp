@@ -3,7 +3,7 @@
 (defparameter *selected-todo* nil)
 (defparameter *selected-group* 'all)
 (defparameter *global-save-file* "current.todo-list")
-(defparameter *morning-template* "todo/morning.todo-template")
+(defparameter *morning-template* "todo/resources/morning.todos")
 (defparameter *sleep-template* "todo/sleep.todo-template")
 (defparameter *test-template* "todo/small.todo-template")
 (defparameter *global-group-file* "todo/groups.list")

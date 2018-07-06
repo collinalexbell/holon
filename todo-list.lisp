@@ -34,12 +34,16 @@
   (push todo-instance *todo-list*)
   (setf *todo-list* (sort-by-priority *todo-list*)))
 
-(defun add-todo (item &key (priority 0) (todo-groups '()))
+(defun add-todo (item &key (priority 0) (todo-groups '()) (parent nil))
   (push 'all todo-groups)
   (if (not (eq *selected-group* 'all)) (push *selected-group* todo-groups))
   (add-new-groups-to-group-list todo-groups)
   (push-todo-and-re-sort
-   (make-instance 'todo :description item :priority priority :groups todo-groups))
+   (make-instance 'todo
+                  :description item
+                  :priority priority
+                  :groups todo-groups
+                  :parent (find-todo parent)))
   (save-and-redisplay))
 
 (define-test add-todo-test
@@ -91,5 +95,23 @@
   (if (find item *todo-list* :test #'equal)
       (setf *selected-todo* item)
       (format t "Item does not exist in todo list")))
+
+(defun find-todo (description)
+  (find
+   description
+   *todo-list*
+   :test
+   #'(lambda (item todo)
+       (if (equal item (todo-description todo)) t nil))))
+
+
+(define-test find-todo-test
+  (let ((*todo-list* '()))
+    (add-todo '(all i do is test))
+    (true (equal
+           '(all i do is test)
+           (todo-description (find-todo '(all i do is test)))))
+    (true (equal nil (find-todo '(this is not a todo))))))
+(pare)
 
 
