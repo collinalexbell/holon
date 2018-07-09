@@ -67,6 +67,7 @@
 (defun complete-todo (item)
   (accumulate-work-time *selected-todo*)
   (save-completed-todo *selected-todo*)
+  (todo-complete *selected-todo*)
   (setf *selected-todo* nil)
   (setf *todo-list*
         (delete item *todo-list* :test #'equal)))
@@ -93,7 +94,9 @@
 
 (defun select-todo (item)
   (if (find item *todo-list* :test #'equal)
-      (setf *selected-todo* item)
+      (progn
+        (setf *selected-todo* item)
+        (todo-select *selected-todo*))
       (format t "Item does not exist in todo list")))
 
 (defun find-todo (description)
