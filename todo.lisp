@@ -29,6 +29,51 @@
     (values (todo-selected-duration the-todo) time-diff)))
 
 
+(defun symbol-exists-p (sym)
+  (fboundp sym))
+
+
+(defun todo->a-symbol-name (description)
+  (reduce
+   #'(lambda (str1 str2)
+       (concatenate 'string str1 str2))
+   (let ((x 0))
+     (mapcar
+      #'(lambda (to-be-sym)
+          (if (= 0 x)
+              (progn
+                (incf x)
+                (symbol-name to-be-sym))
+              (progn
+                (incf x)
+                (concatenate 'string "_" (symbol-name to-be-sym)))))
+      description))))
+
+(defun the-fn-to-test ())
+
+(defun hook-complete-win ())
+
+(defun make-todo-action-hook-symbol (action description)
+  (intern (concatenate 'string "HOOK-" (string action)
+                        "-"
+                        (todo->symbol-name description))))
+
+
+
+(defun todo-complete (the-todo)
+  (let ((the-hook-sym
+         (make-todo-action-hook-symbol 'complete
+                                       (todo-description the-todo))))
+    (if (symbol-existsp the-hook-sym)
+     (funcall (symbol-function the-hook-sym) the-todo))))
+
+(defun todo-select (the-todo)
+  (let ((the-hook-sym
+          (make-todo-action-hook-symbol 'select
+                                        (todo-description the-todo))))
+    (if (symbol-existsp the-hook-sym)
+     (funcall (symbol-function the-hook-sym) the-todo))))
+
 (defun add-todos (&optional (todos '()))
   ;;todos is a list of todos
   (loop for todo in todos
