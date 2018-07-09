@@ -112,6 +112,5 @@
            '(all i do is test)
            (todo-description (find-todo '(all i do is test)))))
     (true (equal nil (find-todo '(this is not a todo))))))
-(pare)
 
 
