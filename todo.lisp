@@ -43,20 +43,21 @@
           (if (= 0 x)
               (progn
                 (incf x)
-                (symbol-name to-be-sym))
+                (if (not (integerp to-be-sym))
+                    (symbol-name to-be-sym)
+                    (write-to-string to-be-sym)))
               (progn
                 (incf x)
-                (concatenate 'string "_" (symbol-name to-be-sym)))))
+                (concatenate 'string "_" (if (not (integerp to-be-sym))
+                                             (symbol-name to-be-sym)
+                                             (write-to-string to-be-sym))))))
       description))))
 
-(defun the-fn-to-test ())
-
-(defun hook-complete-win ())
 
 (defun make-todo-action-hook-symbol (action description)
   (intern (concatenate 'string "HOOK-" (string action)
                         "-"
-                        (todo->symbol-name description))))
+                        (todo->a-symbol-name description))))
 
 
 
@@ -64,14 +65,14 @@
   (let ((the-hook-sym
          (make-todo-action-hook-symbol 'complete
                                        (todo-description the-todo))))
-    (if (symbol-existsp the-hook-sym)
+    (if (symbol-exists-p the-hook-sym)
      (funcall (symbol-function the-hook-sym) the-todo))))
 
 (defun todo-select (the-todo)
   (let ((the-hook-sym
           (make-todo-action-hook-symbol 'select
                                         (todo-description the-todo))))
-    (if (symbol-existsp the-hook-sym)
+    (if (symbol-exists-p the-hook-sym)
      (funcall (symbol-function the-hook-sym) the-todo))))
 
 (defun add-todos (&optional (todos '()))

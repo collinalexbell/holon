@@ -1,5 +1,7 @@
 (ql:quickload :trivial-open-browser)
 
+(in-package :todo)
+
 (defun hook-complete-smile (the-todo)
   (format t "Please smile~%")
   (sleep 1)
@@ -21,3 +23,6 @@
 
 (defun hook-select-WRITE_SOME_CODE (the-todo)
   (www "http://www.lispworks.com/documentation/HyperSpec/Front/"))
+
+(defun hook-select-DO_25_PUSHUPS (the-todo)
+  (www "https://www.youtube.com/watch?v=2ajpEcD3qkE"))

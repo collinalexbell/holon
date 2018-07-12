@@ -43,7 +43,11 @@
                   :description item
                   :priority priority
                   :groups todo-groups
-                  :parent (find-todo parent)))
+                  :parent (if (not (integerp parent))
+                              (find-todo parent)
+                              (nth parent
+                                   (filter-todos-by-group *todo-list*
+                                                          *selected-group*)))))
   (save-and-redisplay))
 
 (define-test add-todo-test

@@ -5,7 +5,7 @@
 
 (defpackage :todo
   (:use :cl :parachute :postmodern)
-  (:export :select :complete :deselect))
+  (:export :select :complete :deselect :add-todo))
 
 (in-package :todo)
 
