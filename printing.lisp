@@ -35,9 +35,9 @@
 
 (defun print-todo-menu ()
   (format t "~%----------------------------<COMMANDS>-----------------------------~%~%")
-  (format t "SELECT <#> |     COMPLETE    | DESELECT | REMIND <#> <SEC> <MIN> <HOUR>~%")
+  (format t "SELECT <#> |      COMPLETE     | DESELECT | DELETE-SELECTED ~%")
   (format t "-----------------------------------------------------------------------~%")
-  (format t "GROUPS     | SELECT-GROUP <#>")
+  (format t "GROUPS     | SELECT-GROUP <#>  | REMIND <#> <SEC> <MIN> <HOUR>")
   (format t "~%----------------------------<COMMANDS>-----------------------------~%~%"))
 
 
