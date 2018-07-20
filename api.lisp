@@ -1,7 +1,8 @@
 (defun complete ()
-  (format t "You spent ~d seconds in total working on this todo~%"
-          (todo-selected-duration *selected-todo*))
-  (complete-todo *selected-todo*)
+  (let ((selected-todo *selected-todo*))
+    (complete-todo *selected-todo*)
+    (format t "You spent ~d seconds in total working on this todo~%"
+            (todo-selected-duration selected-todo)))
   (save-and-redisplay))
 
 (defun delete-selected ()
