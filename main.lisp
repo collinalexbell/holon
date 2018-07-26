@@ -20,6 +20,7 @@
   (load "todo/todo-list.lisp")
   (load "todo/printing.lisp")
   (load "todo/api.lisp")
-  (load "todo/storage.lisp"))
+  (load "todo/storage.lisp")
+  (load "todo/hooks.lisp"))
 
 (init)
