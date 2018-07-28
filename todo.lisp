@@ -44,12 +44,16 @@
               (progn
                 (incf x)
                 (if (not (integerp to-be-sym))
-                    (symbol-name to-be-sym)
+                    (if (listp to-be-sym)
+                        (todo->a-symbol-name to-be-sym)
+                        (symbol-name to-be-sym))
                     (write-to-string to-be-sym)))
               (progn
                 (incf x)
                 (concatenate 'string "_" (if (not (integerp to-be-sym))
-                                             (symbol-name to-be-sym)
+                                             (if (listp to-be-sym)
+                                                 (todo->a-symbol-name to-be-sym)
+                                                 (symbol-name to-be-sym))
                                              (write-to-string to-be-sym))))))
       description))))
 
