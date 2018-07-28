@@ -25,3 +25,5 @@
   (load "todo/hooks.lisp"))
 
 (init)
+
+;; A way to integrate todo with the rest of alexandria is to provide a macro with-todos that dynamically lets *todo-list* to the todo 
