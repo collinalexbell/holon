@@ -1,3 +1,5 @@
+(in-package :todo)
+
 (defun complete ()
   (let ((selected-todo *selected-todo*))
     (complete-todo *selected-todo*)
@@ -46,7 +48,7 @@
     (add-todo '(test select))
     (select)
     (true (eq '(test select) (todo-description *selected-todo*)))
-    (setf *selected-todo* nil)
+    (setf todo::*selected-todo* nil)
     (add-todo '(test select 2))
     (select 1)
     (true (eq '(test select) (todo-description *selected-todo*)))))
