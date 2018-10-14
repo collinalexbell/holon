@@ -20,13 +20,12 @@
   (let ((time-diff (- (get-universal-time) (last-selected-time the-todo))))
     (incf (todo-selected-duration the-todo) time-diff)
     (if (not (null (todo-parent the-todo)))
-        (incf (todo-selected-duration (todo-parent the-todo)) time-diff))
+        (accumulate-work-time (todo-parent the-todo)))
     (values (todo-selected-duration the-todo) time-diff)))
 
 
 (defun symbol-exists-p (sym)
   (fboundp sym))
-
 
 (defun todo->a-symbol-name (description)
   (reduce
@@ -57,8 +56,6 @@
   (intern (concatenate 'string "HOOK-" (string action)
                         "-"
                         (todo->a-symbol-name description))))
-
-
 
 (defun todo-complete (the-todo)
   (let ((the-hook-sym
