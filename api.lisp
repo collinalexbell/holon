@@ -63,13 +63,13 @@
 
 
 (defun add-group (group)
-  (if (not (find group *group-list*))
-      (progn (push group *group-list*)
-             (save-groups))))
+  (when (not (find group *group-list*))
+    (push group *group-list*)
+    (save-groups)))
 
 
 (defun delete-group (group)
-  (if (find group (groups-in-todo-list))
+  (when (find group (groups-in-todo-list))
       (error "This group cannot be deleted because a live todo is in it"))
   (setf *group-list* (delete group *group-list*))
   (save-groups))

@@ -18,14 +18,9 @@
 
 (defun accumulate-work-time (the-todo)
   (let ((time-diff (- (get-universal-time) (last-selected-time the-todo))))
-    (setf (todo-selected-duration the-todo)
-          (+ (todo-selected-duration the-todo) time-diff))
+    (incf (todo-selected-duration the-todo) time-diff)
     (if (not (null (todo-parent the-todo)))
-        (setf (todo-selected-duration (todo-parent the-todo))
-              (+ (todo-selected-duration
-                  (todo-parent the-todo))
-                 time-diff)))
-
+        (incf (todo-selected-duration (todo-parent the-todo)) time-diff))
     (values (todo-selected-duration the-todo) time-diff)))
 
 
