@@ -19,9 +19,16 @@
 (defun accumulate-work-time (the-todo)
   (let ((time-diff (- (get-universal-time) (last-selected-time the-todo))))
     (incf (todo-selected-duration the-todo) time-diff)
-    (when (not (null (todo-parent the-todo)))
-	(accumulate-work-time (todo-parent the-todo)))
     (values (todo-selected-duration the-todo) time-diff)))
+
+(define-test t-accumulate-work-time
+  (let ((todo (make-instance 'todo)))
+    (setf (last-selected-time todo) (get-universal-time))
+    (setf (todo-selected-duration todo) 500)
+    (sleep 1)
+    (accumulate-work-time todo)
+    (true (> (slot-value todo 'selected-duration) 500))
+    (true (< (slot-value todo 'selected-duration) 504))))
 
 
 (defun symbol-exists-p (sym)
