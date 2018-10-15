@@ -1,5 +1,5 @@
 (defun print-current-todo ()
-  (if *selected-todo*
+  (when *selected-todo*
       (format t "~a~%~%" (todo-description *selected-todo*))))
 
 (defun print-todo-list ()

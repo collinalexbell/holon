@@ -19,7 +19,7 @@
 (defun accumulate-work-time (the-todo)
   (let ((time-diff (- (get-universal-time) (last-selected-time the-todo))))
     (incf (todo-selected-duration the-todo) time-diff)
-    (if (not (null (todo-parent the-todo)))
+    (when (not (null (todo-parent the-todo)))
 	(accumulate-work-time (todo-parent the-todo)))
     (values (todo-selected-duration the-todo) time-diff)))
 
@@ -44,11 +44,12 @@
 		    (write-to-string to-be-sym)))
 	      (progn
 		(incf x)
-		(concatenate 'string "_" (if (not (integerp to-be-sym))
-					     (if (listp to-be-sym)
-						 (todo->a-symbol-name to-be-sym)
-						 (symbol-name to-be-sym))
-					     (write-to-string to-be-sym))))))
+		(concatenate 'string "_"
+			     (if (not (integerp to-be-sym))
+				 (if (listp to-be-sym)
+				     (todo->a-symbol-name to-be-sym)
+				     (symbol-name to-be-sym))
+				 (write-to-string to-be-sym))))))
       description))))
 
 
@@ -61,7 +62,7 @@
   (let ((the-hook-sym
 	 (make-todo-action-hook-symbol action 
 				       (todo-description the-todo))))
-    (if (symbol-exists-p the-hook-sym)
+    (when (symbol-exists-p the-hook-sym)
 	(funcall (symbol-function the-hook-sym) the-todo))))
 
 (defun add-todos (&optional (todos '()))

@@ -13,7 +13,8 @@
 (defun select-group (group)
   (cond
     ((integerp group) (setf *selected-group* (nth group (current-groups))))
-    ((symbolp group) (if (find group (current-groups)) (setf *selected-group* group)
+    ((symbolp group) (if (find group (current-groups))
+			 (setf *selected-group* group)
                          (error "That group doesn't exist")))
     (t (error "Group is not of type integer or symbol"))))
 

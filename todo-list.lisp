@@ -27,7 +27,7 @@
 
 (defun add-new-groups-to-group-list (groups)
   (loop for group in groups
-        do (if (not (find group *group-list*))
+        do (when (not (find group *group-list*))
                (add-group group))))
 
 (defun push-todo-and-re-sort (todo-instance)
@@ -36,7 +36,8 @@
 
 (defun add-todo (item &key (priority 0) (todo-groups '()) (parent nil))
   (push 'all todo-groups)
-  (if (not (eq *selected-group* 'all)) (push *selected-group* todo-groups))
+  (when (not (eq *selected-group* 'all))
+      (push *selected-group* todo-groups))
   (add-new-groups-to-group-list todo-groups)
   (push-todo-and-re-sort
    (make-instance 'todo
