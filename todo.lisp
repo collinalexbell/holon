@@ -15,6 +15,17 @@
 	   :initarg :parent
 	   :initform nil)))
 
+(defun new-todo (item priority todo-groups parent)
+  (make-instance 'todo
+		 :description item
+		 :priority priority
+		 :groups todo-groups
+		 :parent (if (not (integerp parent))
+			     (find-todo parent)
+			     (nth parent
+				  (filter-todos-by-group *todo-list*
+							 *selected-group*)))))
+
 
 (defun accumulate-work-time (the-todo)
   (let ((time-diff (- (get-universal-time) (last-selected-time the-todo))))

@@ -40,15 +40,7 @@
       (push *selected-group* todo-groups))
   (add-new-groups-to-group-list todo-groups)
   (push-todo-and-re-sort
-   (make-instance 'todo
-                  :description item
-                  :priority priority
-                  :groups todo-groups
-                  :parent (if (not (integerp parent))
-                              (find-todo parent)
-                              (nth parent
-                                   (filter-todos-by-group *todo-list*
-                                                          *selected-group*)))))
+   (new-todo item priority todo-groups parent))
   (save-and-redisplay))
 
 (define-test add-todo-test
@@ -73,14 +65,22 @@
   (accumulate-work-time *selected-todo*)
   (save-completed-todo *selected-todo*)
   (gen-hook *selected-todo* 'complete)
-  (setf *selected-todo* nil)
-  (setf *todo-list*
-        (delete item *todo-list* :test #'equal)))
+  (delete-todo item))
 
 (defun delete-todo (item)
   (setf *selected-todo* nil)
   (setf *todo-list*
         (delete item *todo-list* :test #'equal)))
+
+(define-test t-delete-todo
+  (let ((*todo-list* '())
+	(*selected-todo* nil))
+    (add-todo '(all i do is win))
+    (select 0)
+    (delete-todo (first *todo-list*))
+    (true (null *selected-todo*))
+    (true (= 0 (length *todo-list*)))))
+
 
 (defun filter-todos-by-group (l g)
   (remove-if-not (lambda (t-d)
@@ -99,22 +99,25 @@
 
 (defun select-todo (item)
   (if (find item *todo-list* :test #'equal)
-      (progn
-        (setf *selected-todo* item)
-        (gen-hook *selected-todo* 'select))
+      (progn (setf *selected-todo* item)
+	     (gen-hook *selected-todo* 'select))
       (format t "Item does not exist in todo list")))
 
+(define-test t-select-todo
+  (let ((*todo-list* '())
+	 (*selected-todo* nil))
+     (add-todo '(become a millionaire))
+     (select-todo (first *todo-list*))
+    (true (equal '(become a millionaire) (todo-description
+					  *selected-todo*)))))
+
 (defun find-todo (description)
-  (find
-   description
-   *todo-list*
-   :test
-   #'(lambda (item todo)
-       (if (equal item (todo-description todo)) t nil))))
+  (find description *todo-list*
+	:test #'(lambda (item todo)
+		  (if (equal item (todo-description todo)) t nil))))
 
-
-(define-test find-todo-test
-  (let ((*todo-list* '()))
+(define-test t-find-todo
+  (let* ((*todo-list* '()))
     (add-todo '(all i do is test))
     (true (equal
            '(all i do is test)

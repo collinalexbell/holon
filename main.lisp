@@ -10,10 +10,10 @@
 (in-package :todo)
 
 (defun run-all-package-tests ()
-  (test 'select-group-test)
-  (test 'add-todo-test)
-  (test 'find-todo-test)
-  (test 'test-select))
+  (dolist (test-name
+	   '(select-group-test select-group-by-integer-test
+	     t-delete-todo t-select-todo t-find-todo))
+    (test test-name)))
 
 (defun init ()
   (load "todo/globals.lisp")
@@ -25,5 +25,6 @@
   (load "todo/hooks.lisp"))
 
 (init)
+(run-all-package-tests)
 
 ;; A way to integrate todo with the rest of alexandria is to provide a macro with-todos that dynamically lets *todo-list* to the todo 
