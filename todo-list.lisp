@@ -63,7 +63,7 @@
 (defun load-day-todos (day)
   (add-templated-todos
    (concatenate 'string
-		"todo/resources/"
+		"resources/"
 		(string-downcase (symbol-name day))
 		".todos")))
 

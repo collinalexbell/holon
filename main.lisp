@@ -11,18 +11,18 @@
 
 (defun run-all-package-tests ()
   (dolist (test-name
-	   '(select-group-test select-group-by-integer-test
-	     t-delete-todo t-select-todo t-find-todo))
+	   '(t-delete-todo t-select-todo t-find-todo
+	     t-complete-todo))
     (test test-name)))
 
 (defun init ()
-  (load "todo/globals.lisp")
-  (load "todo/todo.lisp")
-  (load "todo/todo-list.lisp")
-  (load "todo/printing.lisp")
-  (load "todo/api.lisp")
-  (load "todo/storage.lisp")
-  (load "todo/hooks.lisp"))
+  (load "globals.lisp")
+  (load "todo.lisp")
+  (load "storage.lisp")
+  (load "todo-list.lisp")
+  (load "printing.lisp")
+  (load "api.lisp")
+  (load "hooks.lisp"))
 
 (init)
 (run-all-package-tests)
