@@ -1,5 +1,4 @@
 (defparameter *todo-list* '())
-(defparameter *group-list* '(all daemon karl))
 (defparameter *selected-todo* nil)
 (defparameter *selected-group* 'all)
 (defparameter *global-save-file* "current.todo-list")

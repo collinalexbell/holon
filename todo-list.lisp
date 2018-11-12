@@ -1,3 +1,14 @@
+(in-package :todo)
+
+(defclass todo-list ()
+  ((todos :initform '()
+	  :initarg :todos
+	  :accessor .todos)
+   (selected-todo :initform nil
+		  :accessor .selected-todo)
+   (selected-group :initform 'ALL
+		   :accessor .selected-group)))
+
 (defun remove-nth (n list)
   (declare
    (type (integer 0) n)
@@ -5,12 +16,6 @@
   (if (or (zerop n) (null list))
       (cdr list)
       (cons (car list) (remove-nth (1- n) (cdr list)))))
-
-(defun save-groups (&optional (file-name *global-group-file*))
-  (cl-store:store *group-list* file-name))
-
-(defun load-groups (&optional (file-name *global-group-file*))
-  (setf *group-list* (cl-store:restore file-name)))
 
 (defun save-todos (&optional (file-name *global-save-file*))
   (cl-store:store *todo-list* file-name))
@@ -25,30 +30,29 @@
 (defun load-todos (&optional (file-name *global-save-file*))
   (setf *todo-list* (cl-store:restore file-name)))
 
-(defun add-new-groups-to-group-list (groups)
-  (loop for group in groups
-        do (when (not (find group *group-list*))
-               (add-group group))))
-
 (defun push-todo-and-re-sort (todo-instance)
   (push todo-instance *todo-list*)
   (setf *todo-list* (sort-by-priority *todo-list*)))
 
-(defun add-todo (item &key (priority 0) (todo-groups '()) (parent nil))
-  (push 'all todo-groups)
-  (when (not (eq *selected-group* 'all))
+(defun group-constants ()
+  (let ((todo-groups '(all)))
+    (unless (eq *selected-group* 'all)
       (push *selected-group* todo-groups))
-  (add-new-groups-to-group-list todo-groups)
+    todo-groups))
+
+(defun add-todo (item &key (priority 0) (todo-groups '()) (parent nil))
+  (setf todo-groups (append todo-groups (group-constants)))
   (push-todo-and-re-sort
    (new-todo item priority todo-groups parent))
   (save-and-redisplay))
 
 (define-test add-todo-test
   (let ((*todo-list* '())
-        (*group-list* '()))
+	(*selected-group* 'foo))
     (add-todo '(all i do is test) :todo-groups '(test))
-    (true (find 'test *group-list*))
-    (true (= 1 (length *todo-list*)))))
+    (true (find 'test (groups-in-todo-list)))
+    (true (= 1 (length *todo-list*)))
+    (true (find 'foo (todo-groups (first *todo-list*))))))
 
 (defun add-templated-todos (fname)
   (with-open-file (f fname :direction :input)
@@ -56,16 +60,37 @@
           do (add-todo todo :priority 9001 :todo-groups '(templated))))
   (todos))
 
+(defun load-day-todos (day)
+  (add-templated-todos
+   (concatenate 'string
+		"todo/resources/"
+		(string-downcase (symbol-name day))
+		".todos")))
+
 (defun sort-by-priority (l)
   (sort l
         (lambda (a b) (> (todo-priority a)
                          (todo-priority b)))))
 
+(defvar *save-completed-todo* #'save-completed-todo)
 (defun complete-todo (item)
   (accumulate-work-time *selected-todo*)
-  (save-completed-todo *selected-todo*)
+  (apply *save-completed-todo* `(,*selected-todo*))
   (gen-hook *selected-todo* 'complete)
   (delete-todo item))
+
+(define-test t-complete-todo
+  (let* ((*todo-list* '())
+	 (*selected-todo* nil)
+	 (*derp* nil)
+	 (*save-completed-todo* #'(lambda (todo) (setf *derp* todo))))
+    (declare (special *derp*))
+    (add-todo '(all i do is win))
+    (select 0)
+    (complete-todo (first *todo-list*))
+    (true (null *selected-todo*))
+    (true (= 0 (length *todo-list*)))
+    (true (equal (type-of *derp*) 'todo))))
 
 (defun delete-todo (item)
   (setf *selected-todo* nil)
@@ -86,8 +111,6 @@
   (remove-if-not (lambda (t-d)
                    (find g (todo-groups t-d)))
                  l))
-
-(defun current-groups () *group-list*)
 
 (defun groups-in-todo-list ()
   (let ((current-groups '()))
