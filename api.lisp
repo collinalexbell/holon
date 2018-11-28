@@ -33,6 +33,10 @@
     (say-selected-todo))
   (todos))
 
+(defun next ()
+  (unless (null *selected-todo*) (complete))
+  (select))
+
 (define-test test-select
   (let ((*todo-list* '())
         (*selected-todo* nil))
