@@ -4,6 +4,7 @@
 (defparameter *global-save-file* "current.todo-list")
 (defparameter *morning-template* "resources/morning.todos")
 (defparameter *work-template* "resources/work.todos")
+(defparameter *polyphasic-wake* "resources/polyphasic-wake.todos")
 (defparameter *sleep* "resources/sleep.todos")
 (defparameter *test-template* "small.todo-template")
 (defparameter *global-group-file* "groups.list")

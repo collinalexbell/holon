@@ -27,4 +27,4 @@
 (init)
 (run-all-package-tests)
 
-;; A way to integrate todo with the rest of alexandria is to provide a macro with-todos that dynamically lets *todo-list* to the todo 
+;; a way to integrate todo with the rest of alexandria is to provide a macro with-todos that dynamically lets *todo-list* to the todo 
