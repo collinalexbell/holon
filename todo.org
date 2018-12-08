@@ -1,0 +1,4 @@
+* Possible Improvements
+** Add project.lisp which contains todos
+*** These todos can be added to main list by (grab-todos project n)
+** Read TODOs from org files
