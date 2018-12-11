@@ -1,0 +1,3 @@
+[submodule "holon.todo"]
+	path = todo/
+	url = https://github.com/SlightlyCyborg/holon.todo.git
