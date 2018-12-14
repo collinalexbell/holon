@@ -2,3 +2,12 @@
 ** Add project.lisp which contains todos
 *** These todos can be added to main list by (grab-todos project n)
 ** Read TODOs from org files
+
+** Rearchetect Todo System
+***   Task
+***   Task Scheduler
+***    Task Interface
+       - (de)activate
+       - complete
+** A webapp that provides a REPL to the entire holon system
+** A new backend DB and a query app.
