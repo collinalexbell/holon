@@ -1,0 +1,11 @@
+(defparameter *todo-list* '())
+(defparameter *selected-todo* nil)
+(defparameter *selected-group* 'all)
+(defparameter *global-save-file* "current.todo-list")
+(defparameter *morning-template* "todo/resources/morning.todos")
+(defparameter *work-template* "todo/resources/work.todos")
+(defparameter *polyphasic-wake* "todo/resources/polyphasic-wake.todos")
+(defparameter *sleep* "todo/resources/sleep.todos")
+(defparameter *test-template* "small.todo-template")
+(defparameter *global-group-file* "groups.list")
+
