@@ -1,14 +1,14 @@
-(in-package :todo)
+(in-package :task)
 
 (defun complete ()
-  (let ((selected-todo *selected-todo*))
-    (complete-todo *selected-todo*)
-    (format t "You spent ~d seconds in total working on this todo~%"
-            (todo-selected-duration selected-todo)))
+  (let ((selected-task *selected-task*))
+    (complete-task *selected-task*)
+    (format t "You spent ~d seconds in total working on this task~%"
+            (task-selected-duration selected-task)))
   (save-and-redisplay))
 
 (defun delete-selected ()
-  (delete-todo *selected-todo*))
+  (delete-task *selected-task*))
 
 (defun select-group (group)
   (cond
@@ -19,37 +19,37 @@
     (t (error "Group is not of type integer or symbol"))))
 
 (defun deselect ()
-  (unless (null *selected-todo*)
-    (multiple-value-bind (accumulated-time time-diff) (accumulate-work-time *selected-todo*)
-      (format t "You just spent ~d seconds on this incomplete todo, for a total of ~d ~%" time-diff accumulated-time)
-      (setf *selected-todo* nil)
+  (unless (null *selected-task*)
+    (multiple-value-bind (accumulated-time time-diff) (accumulate-work-time *selected-task*)
+      (format t "You just spent ~d seconds on this incomplete task, for a total of ~d ~%" time-diff accumulated-time)
+      (setf *selected-task* nil)
       time-diff)))
 
 (defun select (&optional (index 0))
   (deselect)
-  (let ((todo (nth index (filter-todos-by-group *todo-list* *selected-group*))))
-    (select-todo todo)
-    (setf (last-selected-time todo) (get-universal-time))
-    (say-selected-todo))
-  (todos))
+  (let ((task (nth index (filter-tasks-by-group *task-list* *selected-group*))))
+    (select-task task)
+    (setf (last-selected-time task) (get-universal-time))
+    (say-selected-task))
+  (tasks))
 
 (defun next ()
-  (unless (null *selected-todo*) (complete))
+  (unless (null *selected-task*) (complete))
   (select))
 
 (define-test test-select
-  (let ((*todo-list* '())
-        (*selected-todo* nil))
-    (add-todo '(test select))
+  (let ((*task-list* '())
+        (*selected-task* nil))
+    (add-task '(test select))
     (select)
-    (true (eq '(test select) (todo-description *selected-todo*)))
-    (setf todo::*selected-todo* nil)
-    (add-todo '(test select 2))
+    (true (eq '(test select) (task-description *selected-task*)))
+    (setf task::*selected-task* nil)
+    (add-task '(test select 2))
     (select 1)
-    (true (eq '(test select) (todo-description *selected-todo*)))))
+    (true (eq '(test select) (task-description *selected-task*)))))
 
-(defun todos ()
-  (print-all-todo-info))
+(defun tasks ()
+  (print-all-task-info))
 
 (defun groups ()
   (print-current-groups))

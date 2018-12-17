@@ -1,36 +1,36 @@
 
-(defun print-all-todo-info ()
-  (print-current-todo *selected-todo*)
-  (print-todo-list nil)
-  (print-todo-menu))
+(defun print-all-task-info ()
+  (print-current-task *selected-task*)
+  (print-task-list nil)
+  (print-task-menu))
 
-(defgeneric print-current-todo (current-todo))
+(defgeneric print-current-task (current-task))
 
-(defmethod print-current-todo ((current-todo null)))
+(defmethod print-current-task ((current-task null)))
 
-(defmethod print-current-todo ((current-todo todo))
-  (when current-todo 
-    (print-todo current-todo)))
+(defmethod print-current-task ((current-task task))
+  (when current-task 
+    (print-task current-task)))
 
-(defmethod print-current-todo ((todo-list todo-list))
-  (when (.selected-todo todo-list)
-    (print-todo (.selected-todo todo-list))))
+(defmethod print-current-task ((task-list task-list))
+  (when (.selected-task task-list)
+    (print-task (.selected-task task-list))))
 
-(defun print-todo (selected-todo)
-  (format t "~a~%~%" (todo-description selected-todo)))
+(defun print-task (selected-task)
+  (format t "~a~%~%" (task-description selected-task)))
 
-(defgeneric print-todo-list (todo-list))
+(defgeneric print-task-list (task-list))
 
-(defmethod print-todo-list ((todo-list todo-list)))
+(defmethod print-task-list ((task-list task-list)))
 
-(defmethod print-todo-list ((todo-list null))
-  (when *todo-list*
-    (format t "TODO List (~a):~%" *selected-group*)
-    (loop for todo in (filter-todos-by-group *todo-list* *selected-group*)
-	  for i from 0 to (length *todo-list*)
+(defmethod print-task-list ((task-list null))
+  (when *task-list*
+    (format t "TASK List (~a):~%" *selected-group*)
+    (loop for task in (filter-tasks-by-group *task-list* *selected-group*)
+	  for i from 0 to (length *task-list*)
 	  do (format t "~a) ~dXP: ~a ~%" i
-		     (todo-priority todo)
-		     (todo-description todo)))))
+		     (task-priority task)
+		     (task-description task)))))
 
 (defun print-current-groups ()
   (format t "-----<Groups>-----~%~%")
@@ -51,7 +51,7 @@
 
   (format t "~%-----</Groups>-----~%~%"))
 
-(defun print-todo-menu ()
+(defun print-task-menu ()
   (format t "~%------------------------<COMMANDS>--------------------------~%")
   (format t "SELECT <#> |    COMPLETE     | DESELECT | DELETE-SELECTED ~%")
   (format t "------------------------------------------------------------~%")

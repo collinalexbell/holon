@@ -3,28 +3,28 @@
 (ql:quickload :parachute)
 (ql:quickload :postmodern)
 
-(defpackage :todo
+(defpackage :task
   (:use :cl :parachute :postmodern)
-  (:export :select :complete :deselect :add-todo))
+  (:export :select :complete :deselect :add-task))
 
-(in-package :todo)
+(in-package :task)
 
 (defun run-all-package-tests ()
   (dolist (test-name
-	   '(t-delete-todo t-select-todo t-find-todo
-	     t-complete-todo))
+	   '(t-delete-task t-select-task t-find-task
+	     t-complete-task))
     (test test-name)))
 
 (defun init ()
-  (load "todo/globals.lisp")
-  (load "todo/todo.lisp")
-  (load "todo/storage.lisp")
-  (load "todo/todo-list.lisp")
-  (load "todo/printing.lisp")
-  (load "todo/api.lisp")
-  (load "todo/hooks.lisp"))
+  (load "task/globals.lisp")
+  (load "task/task.lisp")
+  (load "task/storage.lisp")
+  (load "task/task-list.lisp")
+  (load "task/printing.lisp")
+  (load "task/api.lisp")
+  (load "task/hooks.lisp"))
 
 (init)
 (run-all-package-tests)
 
-;; a way to integrate todo with the rest of alexandria is to provide a macro with-todos that dynamically lets *todo-list* to the todo 
+;; a way to integrate task with the rest of alexandria is to provide a macro with-tasks that dynamically lets *task-list* to the task 
