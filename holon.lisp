@@ -1,2 +1,2 @@
 
-(load "todo/main.lisp")
+(load "task/init.lisp")
