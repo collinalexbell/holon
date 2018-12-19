@@ -27,9 +27,6 @@
 (defun delete-tasks (&rest indicies)
   (loop for i in indicies do (setf *task-list* (remove-nth i *task-list*))))
 
-(defun load-tasks (&optional (file-name *global-save-file*))
-  (setf *task-list* (cl-store:restore file-name)))
-
 (defun push-task-and-re-sort (task-instance)
   (push task-instance *task-list*)
   (setf *task-list* (sort-by-priority *task-list*)))

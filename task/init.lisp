@@ -22,7 +22,8 @@
   (load "task/task-list.lisp")
   (load "task/printing.lisp")
   (load "task/api.lisp")
-  (load "task/hooks.lisp"))
+  (load "task/hooks.lisp")
+  (load "task/loader.lisp"))
 
 (init)
 (run-all-package-tests)
