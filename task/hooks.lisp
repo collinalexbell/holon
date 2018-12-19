@@ -2,7 +2,7 @@
 
 (in-package :task)
 
-(defun hook-complete-smile (the-task)
+(defun hook-select-smile (the-task)
   (format t "Please smile~%")
   (sleep 1)
   (loop for x from 0 to 3
