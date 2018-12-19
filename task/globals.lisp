@@ -3,11 +3,5 @@
 (defparameter *selected-task* nil)
 (defparameter *selected-group* 'all)
 (defparameter *global-save-file* "current.task-list")
-(defparameter *morning-template* "task/resources/morning.tasks")
-(defparameter *work-template* "task/resources/work.tasks")
-(defparameter *kroger-prep* "task/resources/night-job.tasks")
-(defparameter *polyphasic-wake* "task/resources/polyphasic-wake.tasks")
-(defparameter *sleep* "task/resources/sleep.tasks")
-(defparameter *test-template* "small.task-template")
 (defparameter *global-group-file* "groups.list")
 
