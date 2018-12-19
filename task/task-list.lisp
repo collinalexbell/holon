@@ -54,12 +54,6 @@
     (true (= 1 (length *task-list*)))
     (true (find 'foo (task-groups (first *task-list*))))))
 
-(defun add-templated-tasks (fname)
-  (with-open-file (f fname :direction :input)
-    (loop for task in (read f)
-          do (add-task task :priority 9001 :task-groups '(templated))))
-  (tasks))
-
 (defun load-day-tasks (day)
   (add-templated-tasks
    (concatenate 'string
