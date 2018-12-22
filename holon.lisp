@@ -1,4 +1,3 @@
-j
 (defpackage :holon
   (:use :cl))
 
@@ -18,4 +17,5 @@ j
 (load "plans.lisp")
 (load "restrictions.lisp")
 (load "task/init.lisp")
+(load "i.lisp")
 
