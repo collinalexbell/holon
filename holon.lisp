@@ -1,4 +1,4 @@
-
+j
 (defpackage :holon
   (:use :cl))
 
@@ -13,4 +13,9 @@
 (defun new-holon (name)
   (make-instance 'holon :name name))
 
+(load "love.lisp")
+(load "focus.lisp")
+(load "plans.lisp")
+(load "restrictions.lisp")
 (load "task/init.lisp")
+
