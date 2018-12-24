@@ -12,6 +12,11 @@
 (defun new-holon (name)
   (make-instance 'holon :name name))
 
+(defun cascade (holon fn)
+  (funcall fn holon)
+  (loop for holon in (slot-value holon 'inferior-holons)
+	do (cascade holon fn)))
+
 (load "love.lisp")
 (load "focus.lisp")
 (load "plans.lisp")
