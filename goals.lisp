@@ -1,15 +1,15 @@
 
 (in-package :holon)
 
-(defclass plan ()
+(defclass goal ()
     ((name :initarg :name)
      (description :initarg :description)
      (why-do-it :initarg :why)
      (tasks :initarg :tasks)))
 
 
-(defun new-plan (name description why tasks)
-  (make-instance 'plan
+(defun new-goal (name description why tasks)
+  (make-instance 'goal
 		 :name name
 		 :description description
 		 :why why
