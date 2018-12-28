@@ -14,3 +14,11 @@
 		 :description description
 		 :why why
 		 :tasks tasks))
+
+
+(defmacro defgoal (name description why tasks)
+  `(defparameter ,name
+     (new-goal (quote ,name)
+	       ,description
+	       ,why
+	       ,tasks)))
