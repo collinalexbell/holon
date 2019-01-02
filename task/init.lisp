@@ -5,7 +5,7 @@
 
 (defpackage :task
   (:use :cl :parachute :postmodern)
-  (:export :select :complete :deselect :add-task))
+  (:export :select :complete :deselect :add-task :tasks))
 
 (in-package :task)
 
