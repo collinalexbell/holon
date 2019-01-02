@@ -4,7 +4,18 @@
 
 (defparameter todays-topic 'holon)
 
-(defparameter all-topics '(holon fitness))
+(defparameter all-topics
+  '(holon
+    politics
+    math
+    physics
+    gardening
+    outdoor-sports
+    cybernetics
+    robotics
+    programming
+    entrepreneurship
+    vlog))
 
 (defun next-topic ()
   (let ((next (or (cadr (member todays-topic all-topics))
