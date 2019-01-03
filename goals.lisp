@@ -18,7 +18,7 @@
 
 (defmacro defgoal (name description why tasks)
   `(defparameter ,name
-     (new-goal (quote ,name)
-	       ,description
-	       ,why
-	       ,tasks)))
+     (new-goal ',name
+	       ',description
+	       ',why
+	       ',tasks)))
