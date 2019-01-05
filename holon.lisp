@@ -22,6 +22,9 @@
 
 (defgeneric renew (holon))
 
+(defmethod renew ((holon holon))
+  (format t "An abstract holon is like a mathematical point.~%Therefore, there is nothing to it, so it can't be renewed"))
+
 (load "love.lisp")
 (load "focus.lisp")
 (load "plans.lisp")
