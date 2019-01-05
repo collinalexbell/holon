@@ -10,3 +10,5 @@
 	(concatenate 'list
 		     '(mind body)
 		     (slot-value I 'inferior-holons))))
+
+(init-I)
