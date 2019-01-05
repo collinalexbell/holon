@@ -17,6 +17,11 @@
   (loop for holon in (slot-value holon 'inferior-holons)
 	do (cascade holon fn)))
 
+(defun shake (holon)
+  (cascade holon #'renew))
+
+(defgeneric renew (holon))
+
 (load "love.lisp")
 (load "focus.lisp")
 (load "plans.lisp")
