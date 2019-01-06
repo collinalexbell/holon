@@ -1,7 +1,7 @@
 (in-package :holon)
 
 (defun init-I ()
-  (defvar I (new-holon 'I))
+  (defvar I (new-human 'Collin))
   (setf (slot-value I 'superior-holons)
 	(concatenate 'list
 		     '(USA Tennessee Kroger)
