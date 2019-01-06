@@ -1,4 +1,4 @@
-# A lisp system meant to develop myself into a better human.
+# An expiriement in Lisp to codify my thought processes.
 
 The word holon represents a self-stable unit of being.
 
