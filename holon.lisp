@@ -30,5 +30,6 @@
 (load "plans.lisp")
 (load "restrictions.lisp")
 (load "task/init.lisp")
+(load "human.lisp")
 (load "i.lisp")
 
