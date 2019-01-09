@@ -3,7 +3,7 @@
 ;;; Will not run, macro `with-holon` not yet defined
 
 (defun shower (human)
-  (with-holon human
+  (with-human human
     (choose-post-shower-clothing)
     (get-towel)
     (get-washcloth)

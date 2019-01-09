@@ -1,7 +1,9 @@
 (in-package :holon)
 
 (defclass human (holon)
-  ())
+  (tasks))
+
+(defmacro with-human (the-human body))
 
 (defmethod renew ((person human))
   (format t "Have a good rest human."))
