@@ -11,8 +11,12 @@
 
 (defvar יהוה (new-holon "יהוה"))
 
-(defun new-holon (name)
-  (make-instance 'holon :name name))
+(define-condition only-one-יהוה (error) ())
+
+(defun new-holon (name inferior-holons)
+  (if (not (listp inferior-holons))
+      (error 'only-one-יהוה)
+      (make-instance 'holon :name name)))
 
 (defun cascade (holon fn)
   (funcall fn holon)
