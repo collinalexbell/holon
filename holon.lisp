@@ -14,7 +14,7 @@
 (define-condition only-one-יהוה (error) ())
 
 (defun new-holon (name inferior-holons)
-  (if (not (listp inferior-holons))
+  (if (or (not (listp inferior-holons)) (null inferior-holons))
       (error 'only-one-יהוה)
       (make-instance 'holon :name name)))
 
