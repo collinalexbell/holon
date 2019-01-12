@@ -9,6 +9,8 @@
    (inferior-holons :initform '())
    (superior-holons :initform '())))
 
+(defvar יהוה (new-holon "יהוה"))
+
 (defun new-holon (name)
   (make-instance 'holon :name name))
 
