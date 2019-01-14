@@ -9,13 +9,13 @@
    (inferior-holons :initform '())
    (superior-holons :initform '())))
 
-(defvar יהוה (new-holon "יהוה"))
+(defvar god (new-holon "god" '()))
 
-(define-condition only-one-יהוה (error) ())
+(define-condition only-one-god (error) ())
 
 (defun new-holon (name inferior-holons)
   (if (or (not (listp inferior-holons)) (null inferior-holons))
-      (error 'only-one-יהוה)
+      (error 'only-one-god)
       (make-instance 'holon :name name)))
 
 (defun cascade (holon fn)
