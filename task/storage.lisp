@@ -21,6 +21,7 @@
   (multiple-value-bind (s m h d mo y) (get-decoded-time)
    (sb-thread:make-thread
     #'(lambda ()
-	(chirp:statuses/update
-	 (format nil "~a completed at ~d/~d/~d ~d:~d:~d"
-		 (task-description task) y mo d h m s))))))
+	(ignore-errors
+	 (chirp:statuses/update
+	  (format nil "~a completed at ~d/~d/~d ~d:~d:~d"
+		  (task-description task) y mo d h m s)))))))
