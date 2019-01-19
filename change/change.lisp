@@ -22,4 +22,4 @@
 
 (defun change (change-to-be-made)
   (get-leverage change-to-be-made)
-  (apply-leverage))
+  (apply-leverage change-to-be-made))
