@@ -8,7 +8,8 @@
   (save-and-redisplay))
 
 (defun delete-selected ()
-  (delete-task *selected-task*))
+  (delete-task *selected-task*)
+  (format t "Is this an outdated task, if so remove it from task file too"))
 
 (defun select-group (group)
   (cond
