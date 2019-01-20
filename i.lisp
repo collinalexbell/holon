@@ -4,7 +4,7 @@
   (defvar I (new-human 'Collin))
   (setf (slot-value I 'superior-holons)
 	(concatenate 'list
-		     '(USA Tennessee Kroger)
+		     '(USA Tennessee)
 		     (slot-value I 'superior-holons)))
   (setf (slot-value I 'inferior-holons)
 	(concatenate 'list
