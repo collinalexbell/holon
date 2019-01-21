@@ -1,6 +1,10 @@
 
 (defun mastery ()
   (loop
-    (master-thoughts)
-    (master-actions)))
+    (learn-from-past)
+    (use-thought-to-improve-future-action)
+    (take-precise-action)
+    (gain-experience)))
+
+
 
