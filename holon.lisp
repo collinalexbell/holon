@@ -7,7 +7,8 @@
 (defclass holon ()
   ((name :initarg :name)
    (inferior-holons :initform '())
-   (superior-holons :initform '())))
+   (superior-holons :initform '())
+   (state :initform 'intact)))
 
 (defvar god (new-holon "god" '()))
 
@@ -27,8 +28,14 @@
   (cascade holon #'renew))
 
 (defgeneric renew (holon))
+(defgeneric disolve (holon))
 
 (defmethod renew ((holon holon))
   (format t "An abstract holon is like a mathematical point.~%Therefore, there is nothing to it, so it can't be renewed"))
+
+(defmethod disolve ((holon holon))
+  (dolist (inferior-holon (slot-value holon 'inferior-holons))
+    (disolve inferior-holon))
+  (setf (slot-value holon 'state) 'disolved))
 
 
