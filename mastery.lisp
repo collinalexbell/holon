@@ -13,6 +13,8 @@
 
 (defun learn-from-past ()
   (execute '(remember relevant and salient moments))
+  (execute '(reinforce positive moment causes))
+  (execute '(inhibit negative moment causes))
   (execute '(make slight modifications to the moments and resimulate them mentally))
   (execute '(if the modification improves simulation result then note the modification as positive))
   (execute '(if the modification detracts from simulation result then note the modification as negative)))
