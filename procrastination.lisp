@@ -16,5 +16,5 @@
   (count-if
    #'identity
    `(,(procrastination-here-is-positive? human task)
-     ,(recent-spike-in-performance-cant-be-replicated-today? human)
+     ,(perception-that-recent--performance-cant-be-replicated-today? human)
      ,(human-may-look-incompetent-doing-task? human task))))
