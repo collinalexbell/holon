@@ -10,3 +10,11 @@
    (or
     (super-risky? (simulate-task-risk-reward human task))
     (must-wait-on-information-generation? human task)))
+
+
+(defun procrastination-likelyhood (human task)
+  (count-if
+   #'identity
+   `(,(procrastination-here-is-positive? human task)
+     ,(recent-spike-in-performance-cant-be-replicated-today? human)
+     ,(human-may-look-incompetent-doing-task? human task))))
