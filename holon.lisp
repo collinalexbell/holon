@@ -9,17 +9,6 @@
    (superior-holons :initform '() :initarg :superior-holons)
    (state :initform 'intact)))
 
-;;;A god holon allows a holarchy to be formed with 1 root node
-(defvar god (new-holon "god"))
-
-(defun new-holon (name &optional
-			 (inferior-holons '(god))
-			 (superior-holons '()))
-  (push superior-holons god)
-  (make-instance 'holon :name name
-			:inferior-holons inferior-holons
-			:superior-holons superior-holons))
-
 (defun cascade (holon fn)
   (funcall fn holon)
   (loop for holon in (slot-value holon 'inferior-holons)
