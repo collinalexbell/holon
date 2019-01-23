@@ -13,7 +13,7 @@
 (defvar god (new-holon "god"))
 
 (defun new-holon (name &optional
-			 (inferior-holons '())
+			 (inferior-holons '(god))
 			 (superior-holons '()))
   (push superior-holons god)
   (make-instance 'holon :name name
