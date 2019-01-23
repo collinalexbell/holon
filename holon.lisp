@@ -1,5 +1,6 @@
 (defpackage :holon
-  (:use :cl))
+  (:use :cl)
+  (:export :holon))
 
 (in-package :holon)
 
