@@ -3,21 +3,22 @@
 
 (in-package :holon)
 
-
 (defclass holon ()
   ((name :initarg :name)
-   (inferior-holons :initform '())
-   (superior-holons :initform '())
+   (inferior-holons :initform '() :initarg :inferior-holons)
+   (superior-holons :initform '() :initarg :superior-holons)
    (state :initform 'intact)))
 
-(defvar god (new-holon "god" '()))
+;;;A god holon allows a holarchy to be formed with 1 root node
+(defvar god (new-holon "god"))
 
-(define-condition only-one-god (error) ())
-
-(defun new-holon (name inferior-holons)
-  (if (or (not (listp inferior-holons)) (null inferior-holons))
-      (error 'only-one-god)
-      (make-instance 'holon :name name)))
+(defun new-holon (name &optional
+			 (inferior-holons '())
+			 (superior-holons '()))
+  (push superior-holons god)
+  (make-instance 'holon :name name
+			:inferior-holons inferior-holons
+			:superior-holons superior-holons))
 
 (defun cascade (holon fn)
   (funcall fn holon)
