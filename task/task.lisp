@@ -1,4 +1,4 @@
-(defclass task ()
+(defclass task (holon)
   ((description :accessor task-description
 		:initarg :description)
    (priority :accessor task-priority

@@ -4,7 +4,7 @@
 (ql:quickload :postmodern)
 
 (defpackage :task
-  (:use :cl :parachute :postmodern)
+  (:use :cl :parachute :postmodern :holon)
   (:export :select :complete :deselect :add-task :tasks))
 
 (in-package :task)
