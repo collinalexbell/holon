@@ -1,8 +1,13 @@
 
 (in-package :holon)
 
+(defun wait ()
+  (read-line))
+
 (defun execute (thing)
-  (format t "I will ~a~%" thing))
+  (format t "I will ~a~%" thing)
+  (format t "Press ENTER to continue.~%")
+  (wait))
 
 (defun mastery-step ()
     (learn-from-past)
