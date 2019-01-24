@@ -2,9 +2,7 @@
 ;;; Derived from 20 articles on procrastination
 
 (defun procrastinate (human task)
-  (focus human
-	 (set-difference (possible-foci human)
-			 (list task))))
+  (focus human (best-coping-response)))
 
 (defun procrastination-here-is-positive? (human task)
    (or
@@ -18,3 +16,14 @@
    `(,(procrastination-here-is-positive? human task)
      ,(perception-that-recent--performance-cant-be-replicated-today? human)
      ,(human-may-look-incompetent-doing-task? human task))))
+
+(defvar *coping-responses*
+  '(avoidance
+    denial
+    distraction
+    valorisation
+    blaming
+    humor))
+
+(defun best-coping-response ()
+  (nth (random (length *coping-responses*)) *coping-responses*))
