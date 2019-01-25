@@ -1,4 +1,3 @@
-
 ;;; Derived from 20 articles on procrastination
 
 (defun procrastinate (human task)
@@ -27,3 +26,16 @@
 
 (defun best-coping-response ()
   (nth (random (length *coping-responses*)) *coping-responses*))
+
+
+(defun management ()
+  (execute
+   '(become aware of habits and thoughts that lead to procrastination)
+   '(seek help on self-defeating problems)
+   '(evaluate oneself fairly and honestly)
+   '(set realistic goals)
+   '(restructure daily activities)
+   '(modify environment to eliminate distractions)
+   '(set priorities)
+   '(use enjoyable activities as motivation)
+   '(use time blocking)))
