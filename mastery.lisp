@@ -9,6 +9,10 @@
   (format t "Press ENTER to continue.~%")
   (wait))
 
+(defun gain-mastery (iteration)
+  (loop for x to (- iteration 1)
+	do (mastery-step)))
+
 (defun mastery-step ()
     (learn-from-past)
     (use-thought-to-improve-future-action)
