@@ -8,4 +8,5 @@
 (load "human.lisp")
 (load "i.lisp")
 (load "youtube.lisp")
+(load "mastery.lisp")
 
