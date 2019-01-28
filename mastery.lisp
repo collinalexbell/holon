@@ -11,6 +11,7 @@
 
 (defun gain-mastery (iteration)
   (loop for x to (- iteration 1)
+	do (format t "step ~a~%" x)
 	do (mastery-step)))
 
 (defun mastery-step ()
