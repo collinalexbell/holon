@@ -66,7 +66,8 @@
 (defvar *save-completed-task* #'save-completed-task)
 (defun complete-task (item)
   (accumulate-work-time *selected-task*)
-  (apply *save-completed-task* `(,*selected-task*))
+  (when (eql *saved-task-backend* 'twitter) 
+   (apply *save-completed-task* `(,*selected-task*)))
   (gen-hook *selected-task* 'complete)
   (delete-task item))
 
