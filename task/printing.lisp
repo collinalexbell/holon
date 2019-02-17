@@ -1,3 +1,4 @@
+(in-package :task)
 
 (defun print-all-task-info ()
   (print-current-task *selected-task*)
@@ -16,18 +17,27 @@
   (when (.selected-task task-list)
     (print-task (.selected-task task-list))))
 
+(defun get-task-chain (task)
+  (if (not (null (.parent task)))
+      (cons task (get-task-chain (.parent task)))
+      (list task)))
+
 (defun print-task (selected-task)
-  (format t "~a~%~%" (task-description selected-task)))
+  (loop for task in (reverse (get-task-chain selected-task))
+	count task into i
+	do (format t "~{~c~}~a~%"
+		   (make-list (* 2 (- i 1)) :initial-element #\.)
+		   (task-description task))))
 
 (defgeneric print-task-list (task-list))
 
 (defmethod print-task-list ((task-list task-list)))
 
 (defmethod print-task-list ((task-list null))
-  (when *task-list*
-    (format t "TASK List (~a):~%" *selected-group*)
-    (loop for task in (filter-tasks-by-group *task-list* *selected-group*)
-	  for i from 0 to (length *task-list*)
+  (when (inferior-holons *selected-task*)
+    (format t "~%")
+    (loop for task in (filter-tasks-by-group (inferior-holons *selected-task*) *selected-group*)
+	  for i from 0 to (length (inferior-holons *selected-task*))
 	  do (format t "~a) ~dXP: ~a ~%" i
 		     (task-priority task)
 		     (task-description task)))))

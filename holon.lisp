@@ -1,12 +1,14 @@
 (defpackage :holon
   (:use :cl)
-  (:export :holon))
+  (:export :holon :inferior-holons))
 
 (in-package :holon)
 
 (defclass holon ()
   ((name :initarg :name)
-   (inferior-holons :initform '() :initarg :inferior-holons)
+   (inferior-holons :initform '()
+		    :initarg :inferior-holons
+		    :accessor inferior-holons)
    (superior-holons :initform '() :initarg :superior-holons)
    (state :initform 'intact)))
 

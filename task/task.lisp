@@ -11,7 +11,7 @@
 		      :initarg :selected-duration
 		      :initform 0)
    (last-selected-time :accessor last-selected-time)
-   (parent :accessor task-parent
+   (parent :accessor .parent
 	   :initarg :parent
 	   :initform nil)))
 
@@ -20,12 +20,7 @@
 		 :description item
 		 :priority priority
 		 :groups task-groups
-		 :parent (if (not (integerp parent))
-			     (find-task parent)
-			     (nth parent
-				  (filter-tasks-by-group *task-list*
-							 *selected-group*)))))
-
+		 :parent parent))
 
 (defun accumulate-work-time (the-task)
   (let ((time-diff (- (get-universal-time) (last-selected-time the-task))))

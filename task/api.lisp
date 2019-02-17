@@ -23,12 +23,11 @@
   (unless (null *selected-task*)
     (multiple-value-bind (accumulated-time time-diff) (accumulate-work-time *selected-task*)
       (format t "You just spent ~d seconds on this incomplete task, for a total of ~d ~%" time-diff accumulated-time)
-      (setf *selected-task* nil)
+      (setf *selected-task* (.parent *selected-task*))
       time-diff)))
 
 (defun select (&optional (index 0))
-  (deselect)
-  (let ((task (nth index (filter-tasks-by-group *task-list* *selected-group*))))
+  (let ((task (nth index (filter-tasks-by-group (inferior-holons *selected-task*) *selected-group*))))
     (select-task task)
     (setf (last-selected-time task) (get-universal-time))
     (say-selected-task))
@@ -39,7 +38,7 @@
   (select))
 
 (define-test test-select
-  (let ((*task-list* '())
+  (let (((slot-value *selected-task* 'inferior-holons) '())
         (*selected-task* nil))
     (add-task '(test select))
     (select)
