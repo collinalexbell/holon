@@ -17,7 +17,7 @@
 (load-secrets)
 
 
-(defun save-completed-task (task)
+(defun twitter-save-completed-task (task)
   (multiple-value-bind (s m h d mo y) (get-decoded-time)
    (sb-thread:make-thread
     #'(lambda ()
@@ -25,3 +25,12 @@
 	 (chirp:statuses/update
 	  (format nil "~a completed at ~d/~d/~d ~d:~d:~d"
 		  (task-description task) y mo d h m s)))))))
+
+
+
+(defun txt-save-completed-task (task)
+  (multiple-value-bind (s m h d mo y) (get-decoded-time)
+    (with-open-file (f *archive-file* :direction :output
+				      :if-exists :append
+				      :if-does-not-exist :create)
+      (format f "~a completed at ~d/~d/~d ~d:~d:~d~%~%" (task-description task) y mo d h m s))))

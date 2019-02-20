@@ -16,8 +16,8 @@
     (test test-name)))
 
 (defun init ()
-  (load "task/globals.lisp")
   (load "task/task.lisp")
+  (load "task/globals.lisp")
   (load "task/storage.lisp")
   (load "task/task-list.lisp")
   (load "task/printing.lisp")
