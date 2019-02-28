@@ -1,10 +1,12 @@
 (in-package :task)
 
 (defun complete ()
-  (let ((selected-task *selected-task*))
-    (complete-task *selected-task*)
-    (format t "You spent ~d seconds in total working on this task~%"
-            (task-selected-duration selected-task)))
+  (when (or (null (subtasks *selected-task*))
+	    (yes-no "This task has subtasks.~%Do you wish to complete it?"))
+    (let ((selected-task *selected-task*))
+      (complete-task *selected-task*)
+      (format t "You spent ~d seconds in total working on this task~%"
+	      (task-selected-duration selected-task))))
   (save-and-redisplay))
 
 (defun delete-selected ()

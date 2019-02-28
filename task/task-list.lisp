@@ -9,6 +9,11 @@
    (selected-group :initform 'ALL
 		   :accessor .selected-group)))
 
+(defun yes-no (prompt)
+  (format t prompt)
+  (format t "~%Enter y/n to respond:")
+  (eq 'y (read)))
+
 (defun remove-nth (n list)
   (declare
    (type (integer 0) n)

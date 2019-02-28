@@ -22,6 +22,9 @@
 		 :groups task-groups
 		 :parent parent))
 
+(defun subtasks (task)
+  (inferior-holons task))
+
 (defun accumulate-work-time (the-task)
   (let ((time-diff (- (get-universal-time) (last-selected-time the-task))))
     (incf (task-selected-duration the-task) time-diff)
