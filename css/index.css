@@ -1,0 +1,34 @@
+@font-face{
+    font-family: monitorica;
+    src:url('../fonts/monitorica.regular.ttf') format('truetype');
+}
+
+#logo {
+    float:left;
+    height:200px;
+    transform: scaleX(-1);
+}
+
+#header {
+    display:inline-block;
+    width:70%;
+}
+
+#header-name {
+    margin-top:60px;
+    width:50%;
+}
+
+#content {
+    font-family: monitorica;
+}
+
+#about {
+	margin-top: 50px;
+	float: left;
+}
+
+#products {
+    float:left;
+    width:100%
+}
