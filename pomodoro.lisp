@@ -1,9 +1,9 @@
 (in-package :holon)
 
 (defun pomodoro (time-in-minutes number-of-tasks)
-  (let ((meditate-time (* time-in-minutes 0.03))
+  (let ((meditate-time (* time-in-minutes 0.05))
         (mastery-time (* time-in-minutes 0.05))
-        (per-task-time (* time-in-minutes (/ 0.8 number-of-tasks)))
+        (per-task-time (* time-in-minutes (/ 0.85 number-of-tasks)))
         (rest-time (* time-in-minutes (- 1 0.03 0.05 0.8))))
 
     (let ((instructions
