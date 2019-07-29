@@ -1,11 +1,9 @@
-
 (in-package :holon)
 
 (defun become-congruent-about (x)
-  (re-align-conflicting-values (concatenate
-				'list
-				(identify-inner-conflict-about x)
-				x)))
+  (re-align-conflicting-values
+   (concatenate 'list `(,(identify-inner-conflict-about x)) `(,x))))
+
 
 (defun identify-inner-conflict-about (x)
   (format t "Think about what is holding me back in ~a. Write that thing down." x)
