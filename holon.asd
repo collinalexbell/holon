@@ -4,7 +4,7 @@
   :author "Collin Bell <collinalexbelL@gmail.com>"
   :license "Public Domain"
   :depends-on ("parachute"
-	       "postmodern")
+               "postmodern")
   :components ((:file "holon")
                (:file "love")
                (:file "focus")
@@ -15,4 +15,5 @@
                (:file "i")
                (:file "youtube")
                (:file "mastery")
-               (:file "pomodoro")))
+               (:file "pomodoro")
+               (:file "gui")))
