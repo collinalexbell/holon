@@ -4,7 +4,8 @@
   :author "Collin Bell <collinalexbelL@gmail.com>"
   :license "Public Domain"
   :depends-on ("parachute"
-               "postmodern")
+               "postmodern"
+               "cl-cffi-gtk")
   :components ((:file "holon")
                (:file "love")
                (:file "focus")

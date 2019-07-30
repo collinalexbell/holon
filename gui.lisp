@@ -1,5 +1,3 @@
-(quicklisp:quickload :cl-cffi-gtk)
-
 (defpackage :holon.gui
   (:use :cl :gtk :gdk :gdk-pixbuf :gobject :glib :gio :pango :cairo))
 
