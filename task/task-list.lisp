@@ -71,7 +71,8 @@
         (lambda (a b) (> (task-priority a)
                          (task-priority b)))))
 
-(defvar *save-completed-task* #'save-completed-task)
+;(defvar *save-completed-task* #'save-completed-task)
+(defvar *save-completed-task* (lambda () nil))
 (defun complete-task (item)
   (accumulate-work-time *selected-task*)
   (cond
