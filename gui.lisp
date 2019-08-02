@@ -1,7 +1,13 @@
 (defpackage :holon.gui
-  (:use :cl :gtk :gdk :gdk-pixbuf :gobject :glib :gio :pango :cairo))
+  (:use :cl :gtk :gdk :gdk-pixbuf :gobject :glib :gio :pango :cairo)
+  (:export :alert))
 
 (in-package :holon.gui)
+
+(defmacro gtk-run (&rest body)
+  `(sb-int:with-float-traps-masked
+       (:divide-by-zero)
+     ,@body))
 
 (defun alert (msg)
   (gtk-run
@@ -17,7 +23,3 @@
        (gtk-container-add window (gtk-label-new msg))
        (gtk-widget-show-all window)))))
 
-(defmacro gtk-run (&rest body)
-  `(sb-int:with-float-traps-masked
-       (:divide-by-zero)
-     ,@body))
