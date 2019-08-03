@@ -1,0 +1,2 @@
+* TODOS
+** TODO Write out rituals as tasks that run pomodoros.
