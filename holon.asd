@@ -17,4 +17,5 @@
                (:file "youtube")
                (:file "mastery")
                (:file "pomodoro")
-               (:file "gui")))
+               (:file "gui")
+               (:file "purpose")))
