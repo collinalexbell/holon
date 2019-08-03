@@ -18,4 +18,5 @@
                (:file "mastery")
                (:file "pomodoro")
                (:file "gui")
-               (:file "purpose")))
+               (:file "purpose")
+               (:file "behavioural-exceptions")))
