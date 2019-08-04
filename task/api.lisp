@@ -7,11 +7,13 @@
       (complete-task *selected-task*)
       (format t "You spent ~d seconds in total working on this task~%"
 	      (task-selected-duration selected-task))))
-  (save-and-redisplay))
+  (redisplay)
+  (backup *root-task*))
 
 (defun delete-selected ()
   (delete-task *selected-task*)
-  (format t "Is this an outdated task, if so remove it from task file too"))
+  (format t "Is this an outdated task, if so remove it from task file too")
+  (backup *root-task*))
 
 (defun select-group (group)
   (cond
@@ -55,4 +57,3 @@
 
 (defun groups ()
   (print-current-groups))
-

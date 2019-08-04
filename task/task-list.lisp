@@ -25,7 +25,7 @@
 (defun save-tasks (&optional (file-name *global-save-file*))
   (cl-store:store (inferior-holons *selected-task*) file-name))
 
-(defun save-and-redisplay ()
+(defun redisplay ()
   (save-tasks)
   (tasks))
 
@@ -49,7 +49,8 @@
   (setf task-groups (append task-groups (group-constants)))
   (push-task-and-re-sort
    (new-task item priority task-groups parent))
-  (save-and-redisplay))
+  (redisplay)
+  (backup *root-task*))
 
 (define-test add-task-test
   (let (((inferior-holons *selected-task*) '())
