@@ -1,8 +1,8 @@
 (in-package :holon)
 
-(defvar *pomodoro-stream* *standard-output*)
 
 (defun pomodoro (time-in-minutes number-of-tasks)
+  (defparameter *pomodoro-stream* *standard-output*)
   (let ((meditate-time (* time-in-minutes 0.05))
         (mastery-time (* time-in-minutes 0.05))
         (per-task-time (* time-in-minutes (/ 0.85 number-of-tasks)))
@@ -30,7 +30,8 @@
       (sb-thread:make-thread
        (lambda () (loop
                     for instruction in instructions
-                    do (apply #'msg-sleep-and-ping instruction)))))))
+                    do (apply #'msg-sleep-and-ping instruction)))
+       :name "pomodoro"))))
 
 (defun get-pomodoro-thread ()
   (find-if (lambda (thread) (equal "pomodoro" (sb-thread:thread-name thread)))
