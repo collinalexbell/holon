@@ -1,5 +1,9 @@
 package holon.tech;
 
-public class Documentation {
+import java.net.URL;
 
+public class Documentation extends Tech{
+	String name;
+	URL source;
+	Tech subject;
 }

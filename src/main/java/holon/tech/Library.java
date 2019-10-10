@@ -1,5 +1,5 @@
 package holon.tech;
 
-public class Library {
+public class Library extends Software{
 
 }

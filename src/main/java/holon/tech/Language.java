@@ -1,5 +1,5 @@
 package holon.tech;
 
-public class Language {
+public class Language extends Tech{
 
 }

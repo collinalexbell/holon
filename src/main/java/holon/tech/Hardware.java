@@ -1,5 +1,5 @@
 package holon.tech;
 
-public class Hardware {
+public class Hardware extends Tech{
 
 }

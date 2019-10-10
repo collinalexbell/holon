@@ -1,5 +1,5 @@
 package holon.tech;
 
-public class ApplicationSoftware {
+public class ApplicationSoftware extends Software{
 
 }
