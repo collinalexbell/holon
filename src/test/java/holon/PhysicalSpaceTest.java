@@ -20,7 +20,7 @@ public class PhysicalSpaceTest {
 		locs[4] = new Location(3,50,3);
 		
 		for(int i=0; i<objs.length; i++) {
-			objs[i] = new PointObject();
+			objs[i] = new PointObject(space);
 			space.addObject(objs[i], locs[i]);
 		}
 		Set<PhysicalObject> near = space.objectsNear(new Location(0,0,0), 10);
