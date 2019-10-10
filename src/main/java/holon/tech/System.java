@@ -2,7 +2,7 @@ package holon.tech;
 
 import java.util.List;
 
-public class Stack extends Tech{
+public class System extends Tech{
 	List<ApplicationSoftware> applications;
 	List<Language> languages;
 	List<Daemon> daemons;
