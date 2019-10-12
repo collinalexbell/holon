@@ -1,0 +1,38 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="hello-ivy" default="shell">
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes">
+            <classpath refid="master-classpath"/>
+        </javac>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Holon.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="holon.shell.Shell"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/Holon.jar" fork="true"/>
+    </target>
+
+    <target name="resolve" description="--> retrieve dependencies with Ivy">
+        <ivy:retrieve/>
+    </target>
+
+    <path id="master-classpath">
+        <fileset dir="lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+
+</project>
