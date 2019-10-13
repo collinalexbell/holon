@@ -28,11 +28,44 @@
         <ivy:retrieve/>
     </target>
 
+    <target name="testOne" depends="compile">
+        <junit printsummary="yes" haltonfailure="yes">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <pathelement location="build/classes"/>
+                <pathelement path="build/classes"/>
+            </classpath>
+            <test name="${c}"/>
+        </junit>
+    </target>
+
+    <target name="test" depends="compile">
+        <junit printsummary="yes" haltonfailure="yes">
+
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <pathelement location="build/classes"/>
+                <pathelement path="build/classes"/>
+            </classpath>
+
+            <formatter type="plain"/>
+
+            <batchtest fork="yes" todir="reports">
+                <fileset dir="build/classes">
+                    <include name="**/*Test*.class"/>
+                    <exclude name="**/HumanRequiredTestUtility.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
     <path id="master-classpath">
         <fileset dir="lib">
             <include name="*.jar"/>
         </fileset>
     </path>
-
-
 </project>

@@ -1,6 +1,6 @@
 package holon.tech;
 
-import holon.utilities.HumanRequiredTest;
+import holon.utilities.HumanRequiredTestUtility;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,7 +21,7 @@ public class HumanRequiredDocumentationTest {
 
 		try {
 			doc.viewSource();
-			if(!HumanRequiredTest.didItHappen("slightlycyborg's github open in browser")) {
+			if(!HumanRequiredTestUtility.didItHappen("slightlycyborg's github open in browser")) {
 				throw new Exception("It failed");
 			}
 		} catch(Exception e) {
