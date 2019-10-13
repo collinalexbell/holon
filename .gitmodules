@@ -1,13 +1,9 @@
-[submodule "shell"]
-    url = https://github.com/SlightlyCyborg/holon.shell.git
-    active = true
-    path = src/holon/shell
-[submodule "tech"]
-    url = https://github.com/SlightlyCyborg/holon.tech.git
-    active = true
-    path = src/holon/tech
-[submodule "utilities"]
-    url = https://github.com/SlightlyCyborg/holon.utilities.git
-    active = true
-    path = src/holon/utilities
-
+[submodule "src/holon/shell"]
+	path = src/holon/shell
+	url = https://github.com/SlightlyCyborg/holon.shell.git
+[submodule "src/holon/tech"]
+	path = src/holon/tech
+	url = https://github.com/SlightlyCyborg/holon.tech.git
+[submodule "src/holon/utilities"]
+	path = src/holon/utilities
+	url = https://github.com/SlightlyCyborg/holon.utilities.git
