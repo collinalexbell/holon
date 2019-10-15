@@ -1,1 +1,2 @@
+ant compile jar
 java -jar build/jar/Holon.jar

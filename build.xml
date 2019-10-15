@@ -20,10 +20,6 @@
         </jar>
     </target>
 
-    <target name="run">
-        <java jar="build/jar/Holon.jar" fork="true"/>
-    </target>
-
     <target name="resolve" description="--> retrieve dependencies with Ivy">
         <ivy:retrieve/>
     </target>
