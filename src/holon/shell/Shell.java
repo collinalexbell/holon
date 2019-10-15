@@ -5,6 +5,10 @@ import java.io.*;
 
 import java.lang.reflect.Method;
 import java.lang.ClassLoader;
+import java.net.URLClassLoader;
+import java.util.Vector;
+import java.net.URL;
+
 
 
 public class Shell implements Runnable{
@@ -64,7 +68,7 @@ public class Shell implements Runnable{
     }
 
     public void runJavaProgram(String packageName, String[] args) {
-        ClassLoader classLoader = Shell.class.getClassLoader();
+        ClassLoader classLoader = new ShellClassLoader("/home/alex/Projects/holon/build/classes/");
 
         try {
             Class c = classLoader.loadClass(packageName);
