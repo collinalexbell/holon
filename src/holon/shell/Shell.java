@@ -109,6 +109,6 @@ public class Shell implements Runnable{
     }
 
     private void showPrompt() {
-        out.printf("[%s@%s %s]$", usr, host, dir.getName());
+        out.printf("[%s@%s %s]$ ", usr, host, dir.getName());
     }
 }
