@@ -3,6 +3,10 @@ package holon.shell;
 import java.util.logging.Logger;
 import java.io.*;
 
+import java.lang.reflect.Method;
+import java.lang.ClassLoader;
+
+
 public class Shell implements Runnable{
     String usr, host;
     File dir;
@@ -54,6 +58,21 @@ public class Shell implements Runnable{
         while(!command.equals("exit")) {
             showPrompt();
             command = getCommand();
+            String[] args = {};
+            runJavaProgram(command, args);
+        }
+    }
+
+    public void runJavaProgram(String packageName, String[] args) {
+        ClassLoader classLoader = Shell.class.getClassLoader();
+
+        try {
+            Class c = classLoader.loadClass(packageName);
+            Method main = c.getMethod("main", String[].class);
+            Object result = main.invoke(null, new Object[]{args});
+        } catch (Exception e) {
+            System.out.println(e);
+            //System.out.printf("Couldn't run java program: %s\n", packageName);
         }
     }
 
