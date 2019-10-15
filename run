@@ -1,2 +1,5 @@
 ant compile jar
+if [[ "$?" -ne 0 ]] ; then
+  echo 'could not build. exiting'; exit $rc
+fi
 java -jar build/jar/Holon.jar
