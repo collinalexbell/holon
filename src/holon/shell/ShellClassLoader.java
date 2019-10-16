@@ -11,8 +11,8 @@ public class ShellClassLoader extends ClassLoader {
     String baseDir;
     Map<String, Class> classes;
 
-    public ShellClassLoader(String classPath){
-        super();
+    public ShellClassLoader(String classPath, ClassLoader parent){
+        super(parent);
         classes = new HashMap<>();
         baseDir = classPath;
     }
@@ -22,16 +22,23 @@ public class ShellClassLoader extends ClassLoader {
         if (c != null) {
             return c;
         }
-        c = findClass(name);
+        c = searchForClass(name);
         if (c != null) {
             classes.put(name, c);
             return c;
         }
 
-        return super.loadClass(name);
+        try {
+            c = getParent().loadClass(name);
+        } catch(Exception e) {
+            throw e;
+        }
+
+        classes.put(name, c);
+        return c;
     }
 
-    public Class findClass(String name) {
+    public Class searchForClass(String name) {
         String[] components = name.split("\\.");
         StringBuffer pathBuff = new StringBuffer(baseDir);
         for(String pathElement : components) {

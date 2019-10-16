@@ -12,6 +12,7 @@ import java.net.URL;
 
 
 public class Shell implements Runnable{
+    final String classPath = "/home/alex/Projects/holon/build/classes/";
     String usr, host;
     File dir;
     Logger logger = Logger.getLogger("shell");
@@ -57,26 +58,49 @@ public class Shell implements Runnable{
     }
 
     private void shellLoop() {
-        String command = "";
+        String[] command = new String[]{};
 
-        while(!command.equals("exit")) {
+        while(command.length < 1 || !command[0].equals("exit")) {
             showPrompt();
             command = getCommand();
-            String[] args = {};
-            runJavaProgram(command, args);
+            for(String str: command){
+            }
+
+            if(command.length < 1) continue;
+            if(command[0].equals("test")) {
+                try{
+                    ClassLoader classLoader = new ShellClassLoader(
+                            classPath, Shell.class.getClassLoader());
+                    Class testRunner = classLoader.loadClass("holon.shell.TestRunner");
+
+                    Class[] testClasses = new Class[command.length-1];
+                    for(int i = 1; i < command.length; i++) {
+                        testClasses[i-1] = classLoader.loadClass(command[i]);
+                    }
+                    if(testClasses.length > 0) {
+                        try {
+                        Method runTests = testRunner.getMethod("runTests", Class[].class);
+                        Object result = runTests.invoke(null, new Object[]{testClasses});
+                        } catch(Exception e){}
+                    }
+                } catch (ClassNotFoundException exception) {}
+            } else {
+                String[] args = {};
+                runJavaProgram(command[0], args);
+            }
         }
     }
 
     public void runJavaProgram(String packageName, String[] args) {
-        ClassLoader classLoader = new ShellClassLoader("/home/alex/Projects/holon/build/classes/");
+        ClassLoader classLoader = new ShellClassLoader(
+                classPath, Shell.class.getClassLoader());
 
         try {
             Class c = classLoader.loadClass(packageName);
             Method main = c.getMethod("main", String[].class);
             Object result = main.invoke(null, new Object[]{args});
         } catch (Exception e) {
-            System.out.println(e);
-            //System.out.printf("Couldn't run java program: %s\n", packageName);
+            System.out.printf("Couldn't run java program: %s\n", packageName);
         }
     }
 
@@ -94,17 +118,17 @@ public class Shell implements Runnable{
         out.println("holon.shell shutting down ...");
     }
 
-    private String preProcessCommand(String command) {
-        return command.trim();
+    private String[] preProcessCommand(String command) {
+        return command.trim().split("\\s");
     }
 
-    private String getCommand() {
+    private String[] getCommand() {
         String command = "";
         try {
             command = in.readLine();
             return preProcessCommand(command);
         } catch (Exception e) {
-            return command;
+            return new String[]{command};
         }
     }
 
