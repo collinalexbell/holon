@@ -8,6 +8,8 @@ import java.lang.ClassLoader;
 import java.net.URLClassLoader;
 import java.util.Vector;
 import java.net.URL;
+import java.util.Map;
+import java.util.HashMap;
 
 
 
@@ -18,12 +20,18 @@ public class Shell implements Runnable{
     Logger logger = Logger.getLogger("shell");
     BufferedReader in;
     PrintStream out = System.out;
+    private Map<String, String> imports;
 
     private Shell() {
         initPath();
         initSystemProps();
         initConsole();
+        initContext();
     };
+
+    private void initContext() {
+        imports = new HashMap<>();
+    }
 
     private void initConsole() {
         InputStreamReader reader = new InputStreamReader(System.in);
@@ -57,6 +65,15 @@ public class Shell implements Runnable{
 
     }
 
+    private String getFullClassName(String anyName) {
+        String fullName = imports.get(anyName);
+        if(fullName == null) {
+            return anyName;
+        } else {
+            return fullName;
+        }
+    }
+
     private void testClass(String[] command) {
         try{
             ClassLoader classLoader = new ShellClassLoader(
@@ -65,7 +82,8 @@ public class Shell implements Runnable{
 
             Class[] testClasses = new Class[command.length-1];
             for(int i = 1; i < command.length; i++) {
-                testClasses[i-1] = classLoader.loadClass(command[i]);
+                String fullClassName = getFullClassName(command[i]);
+                testClasses[i-1] = classLoader.loadClass(fullClassName);
             }
             if(testClasses.length > 0) {
                 try {
@@ -74,6 +92,14 @@ public class Shell implements Runnable{
                 } catch(Exception e){}
             }
         } catch (ClassNotFoundException exception) {}
+    }
+
+    private void importClass(String fullClassName) {
+        String[] packageComponents = fullClassName.split("\\.");
+        if(packageComponents.length > 1) {
+            String className = packageComponents[packageComponents.length-1];
+            imports.put(className, fullClassName);
+        }
     }
 
     private void shellLoop() {
@@ -88,6 +114,9 @@ public class Shell implements Runnable{
                     case "test":
                         testClass(command);
                         break;
+                    case "import":
+                        importClass(command[1]);
+                        break;
                     default:
                         runJavaProgram(command);
                 }
@@ -98,16 +127,16 @@ public class Shell implements Runnable{
     public void runJavaProgram(String[] command) {
         String[] args = new String[command.length-1];
         System.arraycopy(command, 1, args, 0, command.length-1);
-        String packageName = command[0];
+        String fullClassName = getFullClassName(command[0]);
         ClassLoader classLoader = new ShellClassLoader(
                 classPath, Shell.class.getClassLoader());
 
         try {
-            Class c = classLoader.loadClass(packageName);
+            Class c = classLoader.loadClass(fullClassName);
             Method main = c.getMethod("main", String[].class);
             Object result = main.invoke(null, new Object[]{args});
         } catch (Exception e) {
-            System.out.printf("Couldn't run java program: %s\n", packageName);
+            System.out.printf("Couldn't run java program: %s\n", fullClassName);
         }
     }
 
