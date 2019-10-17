@@ -37,4 +37,18 @@ The editor I built is a hybrid of Emacs and Vim. I want an editor that is extens
 
 The main class inside the editor is the Buffer. The Buffer class is what logically manages the text that is being written. It is the only object that gets fed to the Editor window's display method. The buffer has a name and is associate witha particular file that it can read from and write to.
 
+### Perception
 
+Cybernetics systems almost always have inputs that drive the feedback loops. Holon has several main inputs: Internal system state, Keyboard input, Internet API calls, Vision.
+
+#### Internal System State
+
+Holon will constantly be monitoring itself. It will look at how many processes are running, what code is being executed, and what results are being produced. Much of this data will be recorded in log files that Holon will then analyze. Holon will have a fitness function related to its internal system state and it will use the log files + the fitness function to back propogate error into the system and learn what motifications should be made to make the system more fit. Likewise, it will produce human readable reports so I can manually tweak code to perform better relative to the fitness function.
+
+#### Keyboard input
+
+Keyboard input is the primary way that I currently communicate with digital cybernetics systems. The output of my 10 fingers has less social side effects than talking to my system. It also allows me to input througha large domain very precise information that speaking just can not do efficiently. Imagine trying to write code using your voice. "Open paren" for instance has 3 syllables that must be pronounced, where as I can simply hold shift and press the ( key to generate that symbol on my keyboard. Holon will need to know how to interpret keys in every situation. Emacs handles this requirement by allowing users to define "modes", both major and minor. A mode defines how a program will respond to a key and a mode exists independently from a particular program running that mode.
+
+#### Vision
+
+This mode of perception is the one that humans are most familiar with and the one tha computers have the most trouble with. Only in the last decade have computer scientists began to tackle vision in a significant way. ImageNet competitions have been the driving force behind the advancements in computer vision technology. Now with a simple GPU it easy to implement object recognition on a home computer. Holon will have a lot of computer vision incorporated into the system, initially just to observe me as the user. Over time, I will instanciate components of Holon into robots IRL that will then collect data about their environments. I envision a robotic pet that follows me around, constantly collecting data about my life experience
