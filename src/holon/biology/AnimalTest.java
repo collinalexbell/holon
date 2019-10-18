@@ -1,4 +1,4 @@
-package holon;
+package holon.biology;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

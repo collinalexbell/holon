@@ -1,4 +1,4 @@
-package holon;
+package holon.biology;
 
 public class Mammal extends Animal{
 	private FurCoat coat;

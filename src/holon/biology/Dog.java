@@ -1,4 +1,4 @@
-package holon;
+package holon.biology;
 
 public class Dog extends Mammal{
 	enum Breed {

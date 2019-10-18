@@ -1,4 +1,4 @@
-package holon;
+package holon.biology;
 
 import java.util.Set;
 
