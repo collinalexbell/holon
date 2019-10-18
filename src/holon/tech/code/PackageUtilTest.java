@@ -17,9 +17,8 @@ public class PackageUtilTest {
         } catch (Exception e) {
             fail(e.getMessage());
         }
-        String thisFile = "./src/holon/tech/code/PackageUtilTest.java";
         try {
-            util.moveToPackage(new File(thisFile), "holon.tech");
+            util.moveToPackage("holon/tech/code/PackageUtilTest", "holon.tech");
             String thatFile = "./src/holon/tech/PackageUtilTest.java";
             try(BufferedReader b = new BufferedReader(new FileReader(thatFile))) {
                 String firstLine = b.readLine();
@@ -28,7 +27,7 @@ public class PackageUtilTest {
                 fail();
             }
             try {
-                util.moveToPackage(new File(thatFile), "holon.tech.code");
+                util.moveToPackage("holon.tech.PackageUtilTest", "holon.tech.code");
             } catch (Exception e) {
                 System.out.println("URGENT: test file moved somewhere and not moved back. find it and move it back");
                 fail(e.getMessage());

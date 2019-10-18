@@ -12,14 +12,6 @@ public class PackageUtil {
 
     File srcDir;
 
-    private static boolean filesAreParentChild(File parent, File child) {
-        //recursive base cases
-        if(child == null) return false;
-        if(parent.equals(child)) return true;
-
-        return filesAreParentChild(parent, child.getParentFile());
-    }
-
     public PackageUtil(File srcDir) throws Exception {
         if(srcDir == null || !srcDir.isDirectory()){
             String msg = "srcDir is not a directory";
@@ -67,14 +59,11 @@ public class PackageUtil {
         f.renameTo(dest);
     }
 
-    public void moveToPackage(File classToMove, String packageName) throws Exception{
-        if(!filesAreParentChild(srcDir, classToMove)) {
-            String msg = "classToMove is not available in the srcDir";
-            throw new Exception(msg);
-        }
+    public void moveToPackage(String classToMove, String packageName) throws Exception{
+        File fileToMove = new File(packageDir(classToMove) + ".java");
 
-        if(!classToMove.isFile()) {
-            String msg = "classToMove doesn't exist";
+        if(!fileToMove.isFile()) {
+            String msg = String.format("%s doesn't exist", fileToMove.getPath());
             throw new Exception(msg);
         }
 
@@ -85,7 +74,22 @@ public class PackageUtil {
         }
 
         destDir.mkdirs();
-        changePackageInSrc(classToMove, packageName);
-        moveFileToDir(classToMove, destDir);
+        changePackageInSrc(fileToMove, packageName);
+        moveFileToDir(fileToMove, destDir);
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("running");
+        if(args.length < 2) {
+            System.out.println("not enough args");
+            throw new Exception("not enough arguments");
+        }
+
+        PackageUtil util = new PackageUtil(new File("./src"));
+        try {
+            util.moveToPackage(args[0], args[1]);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
