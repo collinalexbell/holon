@@ -79,7 +79,6 @@ public class PackageUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("running");
         if(args.length < 2) {
             System.out.println("not enough args");
             throw new Exception("not enough arguments");
