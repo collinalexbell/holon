@@ -35,6 +35,34 @@ A major focus of software engineering has been on tool development. For this rea
 
 The tech stack gets its own class and holds a list of many system components at various levels in the stack. Software, hardware, daemons, and documentation are all listed in the stack.
 
+### The filesystem
+The filesystem I propose is not unique in the realm of computer science, but it is very unique to the realm of consumer operating systems. Holon will use a database filesystem. Unix's "everything is a file" mantra was invented before the rise of the RMDB through Oracles popularization of SQL. This means that the filesystem of modern day operating systems is using old technology. With SQL, data can now be stored and retrieved by type and access can be restricted by application, user, or any other type of restriction required. Because Holon will use a single JVM to run all the applications, code can be pulled from the database using a custom classloader and loaded directly into the JVM.The modularity of the JVM allows such code schemes to be mplemented.
+
+While, I originally conjured up this idea from my immagination, the sometimes true aforism "nothing new under the sun" rings true in this particular case. After reading the current Wikipedia article on filesystems, it I discoverd that the idea of a database file-system is as old as the RMDB itself. Oracle has implemented a DBFS, which gives me a working example to study and tweak.
+
+Java files could be stored in a JavaSource table. MetaData about the class could also be generated and used to do static analysis of the code. ByteCode could be stored in another table and the same principle about meta data could apply. Images could be stored in a structured format as well, with metadata being encoded right into the table itself. This would drastically speed up decoding the image from harddisk. There are so many image file formats that could be unified if a database table were used to store images instead of a binary file. I am sure databases already store data in as compressible a format as possible. The database layer would always be able to transform that raw data into text on demand, so the principle of "use plain text files" would not be violated, ever!
+
+What strikes me as most intersting about this concept is that I could store data in the exact same format that I would use the data as a class in the Java system. Implementing a Object filestore inside of a database could be my SOLE filesystem. Why would I ever need anything else? Source code would be saved into a table as a TextBuffer and metaData concerning the source could could also have its own table.
+
+I REALLY hate `cd`ing through my hard drive to find files. Having a simple API that goes something like `mp3.byArtist("Tool").byBPM(100, 130)` would be so fucking dope! No more would I have to drag files from my ~/Downloads folder into the correct folder. If it has .mp3, it goes into the music table, .jpg, it goes into the imgs table, etc, etc.
+
+For the past few years, I have been dreaming about a software system with seamless datastore. Using files to serialize datastructures that can be read by a variety of programs written by a variety of people makes sense in Eric Raymond's bazzar world, but it does not make sense in a holistic world of a single personal computing system. A unified and structured file system makes more sense to me than the current model. For this reason, Holon will use a DBFS.
+
+A significant problem I see with this model is that source control such as git requires source to be organized in a standard file system. This means I would have to make my source code take on the presentation of a standard filesystem while it is actually stored as a DBFS. While this is a problem it is not as significant a problem as I imagined compilation from a DBFS would be. Despite my fears, the javax.tools package of the Java ecosystem seems to have EVERYTHING I need to operating on java code from java code. The `javac` program will never have to be ran in my system. I can load code directly from the DBFS and programatically compile it.
+
+#### javax.tools.JavaFileManager for DBFS
+
+Because I will be using a DBFS, I will need to implement a DBFS version of the `javax.tools.JavaFileManager` class such that all of the classes in `javax.tools` will have access to my database filesystem. There are 12 methods to implement for the JavaFileManager, so it won't be a simple task, but it will be doable. Likewise, a JavaFileManager.Location will also have to be implemented. After implementing these 2 interfaces, I should be able to use all of the Java diagnostic and compilation tools required for a programming workflow that only uses the DBFS system.
+
+#### DBFS as a strong motivator to finish Holon
+
+One advantage that the DBFS provides me as I implement Holon is that it is massively rewarding to be implementing such an innovative filesystem for a personal operating system. Not a single personal computer that I know of uses a DBFS as their primary file system. For me, finishing a system is a challenge. I get bored of the system and decide it isn't worth the effort. The DBFS is incredibly exciting to me and will be a major driving force behind why I will be able to complete the Holon personal computer for myself.
+
+
+#### DBFS lowers the impedence between code and datastore.
+
+Traditionally, there has been a high impedence between a datastore format and the code that uses the data. With a DBFS, the datastore will look more like the Object that uses the data. There no reason why Objects themselves should not be stored on the hardrive by default. The Holon system will do this.
+
 ### The shell
 
 The number of configurations a shell program can run are vastly greater than what an equivalent GUI program can run. The power of the shell simply can't be overlooked. However, most Unix distributions come with Bash as their shell and few people decide to replace it. Shell is equivalent to Bash, but that doesn't have to be the case. I built my own shell in Java. It allows me to launch sandboxed Java programs in the same JVM that the shell is running in. This means that Java threads become much like Linux processes in that the Java thread is how program seperation occurs. Memory between both programs are obviously shared, but this is not a problem due to high level memory management. In a c++ program, it would be easy for one thread to clobber the memory of another thread, but in Java the only way that can happen is if one thread has reference to an object that another thread is using. If I sufficiently seperate the programs that are running in my JVM using a custom class loader, it will become virtually impossible for one program to clobber the other program. The reason for this is that any object created with my custom class loader can not be used by an object created by a seperate instance of my custom class loader. If an object's defining classloader is not in the Classloader hierarchy of another object, then the 2 objects can never interact with eachother. Usually classloaders form a single linked list, which ensures that all objects have their defining class loader in the heirarchy of all other objects. However, my custom classloader branches that linked list into a tree which means that some objects are completely seperated from other objects in the classloader hierarchy. The only way these 2 objects can communicate with eachother is by passing around objects whose classes were defined in classloaders that are higher than the branch point seperating the 2 objects in the classloader heirarchy. Things in the Java language spec such as String, Object, Integer, etc can all be shared amongst these seperate processes, but the process that instanciated the custom class loaders would have to be responsible for using reflection to pass common objects around. One object can not simply hold reference to another object defined in seperate branches of the classloader heirarchy.
@@ -45,6 +73,12 @@ What I can do is create a pseudo-pipe structure that routes objects that are def
 ### The editor
 
 The editor I built is a hybrid of Emacs and Vim. I want an editor that is extensible in a language I like writing in and neither Vim or Emacs meets that requirement. That alone would be enough reason for me to want to write myown editor, but there are still more reasons to do so. By writing the editor, I will understand how its interneals work which will greatly enhace my ability to write extensions for it.
+
+#### Seperation of concerns
+
+The editor will use an MVC pattern. I wish to seprate the logic from the view, because I probably run this on android, java's swing, in a simple terminal, and on a web page. Android uses an XML view, Swing uses a components view, the terminal view will be written in curses, and the web view will use java compiled to ASM that prints to the web page. The underlying data structures that drive the editor will be the same regardless of display platform.
+
+
 
 #### Components
 
