@@ -1,6 +1,7 @@
 package holon;
 
 import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 public class Event {
     private ZonedDateTime when;
@@ -9,6 +10,10 @@ public class Event {
     public Event(String name, ZonedDateTime when) {
         this.name = name;
         this.when = when;
+    }
+
+    public LocalDate getDate() {
+        return LocalDate.from(when);
     }
 
     public String toString() {;
