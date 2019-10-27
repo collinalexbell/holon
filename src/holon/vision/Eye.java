@@ -14,7 +14,7 @@ public class Eye {
 
     Webcam webcam = null;
 
-    public Vision() {
+    public Eye() {
         webcam = Webcam.getWebcams().get(0);
         webcam.open();
     }
