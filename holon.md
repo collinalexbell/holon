@@ -29,6 +29,12 @@ In this section, I want to identify several of the sources of inspiration I have
 
 In Eric Raymond's book, The Cathedral and the Bazzar, Eric makes the assertion that a Bazzar has a more lively atmosphere due to its emergent properties. Cathedrals run on schedules and ritual while Bazzars run on unpredictable marketplace interactions. The Bazzar approach to software development inside the Free and Open Source Software movement has led to a large number of collaborators in software systems. This gave FOSS an advantage over corporate competitors by supplying more man-hours/$ than any proprietary project could have achieved. What it gained manpower, it lost in consistency and direction. A GNU/Linux system has many redundant libraries, each with their own interface variances. FOSS systems not only have to compete with proprietary projects, but also with other FOSS projects and because a FOSS project is not normally driven by profit motive, the number of FOSS competitors generally outnumbers proprietary competitors. This has led to a fracturing of software systems and not just across language lines (although, language choice is one of the larger chasms to cross in software development). Each system has their own way of handling input, errors, output, etc. GUI systems including Java's Swing, GNU's GTK, TCL's Tk, CommonLisp's McCLIIM, and QTCOM's Qt, just to name a few, all function under their own unique paradigm and I haven't even talked about the poliferation of web technologies we see today. To be a "full stack developer" across the entirety of one's computing system (not just web), seems infeasable due to the numerous technologies that someone would have to learn to operating on all layers of their system. The bazzar approach to development has created layers and layers of inoperable technical sediment that no one person has the ability to navigate with skill. Does it have to be this way in FOSS?
 
+## Each Class gets a main
+
+One cool thing about java is that each class can stand as its own independent program by providing a main function. I can compile all of the classes, each of which has their own main function, and this is perfectly acceptable. In C/C++ only one main function can be defined in the entire program.
+
+With each class getting its own main function, I do not have to write what I call application classes. Instead each class independently acts as its own application class.
+
 ## *The tech stack*
 
 A major focus of software engineering has been on tool development. For this reason, a component of Holon is the tech stack. Software developers have editors, command lines, IDEs, debuggers, scripts, project management tools, source control, and much more. Each class of tech has many different species to choose from. I personally wanted to have written most of the tech stack that I directly interact with.
@@ -107,6 +113,10 @@ Keyboard input is the primary way that I currently communicate with digital cybe
 #### Vision
 
 This mode of perception is the one that humans are most familiar with and the one tha computers have the most trouble with. Only in the last decade have computer scientists began to tackle vision in a significant way. ImageNet competitions have been the driving force behind the advancements in computer vision technology. Now with a simple GPU it easy to implement object recognition on a home computer. Holon will have a lot of computer vision incorporated into the system, initially just to observe me as the user. Over time, I will instanciate components of Holon into robots IRL that will then collect data about their environments. I envision a robotic pet that follows me around, constantly collecting data about my life experience
+
+The vision system is written in pure Java. I did not want to deal with native OpenCV. It is a pain to install, it does not work with Maven, and it realies heavily on finalizers to clean up native Matrix structs. If images are being processed at 20fps, the GC can not keep up with finalizing all of the frame and the computer system runs out of memory completely. This is a well documented bug in OpenCV for Java.
+
+Instead of OpenCV, I holon uses BoofCV + a small webcam capture library. The Eye class wraps the webcam capture.
 
 ## Daemons
 
