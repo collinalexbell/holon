@@ -15,8 +15,8 @@ public class Vision {
     Webcam webcam = null;
 
     public Vision() {
-		webcam = Webcam.getWebcams().get(0);
-		webcam.open();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.open();
     }
 
     @Override
