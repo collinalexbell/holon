@@ -6,8 +6,8 @@
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency org="junit" name="junit" rev="4.12"/>
 
-        <!-- https://mvnrepository.com/artifact/org.openpnp/opencv -->
-        <dependency org="org.openpnp" name="opencv" rev="3.4.2-1"/>
-
+        <dependency org="org.boofcv" name="boofcv-core" rev="0.34" />
+        <dependency org="org.boofcv" name="boofcv-swing" rev="0.34" />
+        <dependency org="org.boofcv" name="boofcv-WebcamCapture" rev="0.34" />
     </dependencies>
 </ivy-module>
