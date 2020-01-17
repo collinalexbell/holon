@@ -9,7 +9,7 @@ const routine = require('./routine')
 const readFile = util.promisify(fs.readFile);
 
 const app = express()
-const port = 3000
+const port = 3001
 
 app.use(express.static('public'))
 app.use(express.static('node_modules'))

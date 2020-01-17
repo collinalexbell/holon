@@ -1,3 +1,6 @@
+import React from 'react'
+import Goal from './goal'
+
 class GoalList extends React.Component {
   constructor(props) {
     super(props)
@@ -29,3 +32,5 @@ class GoalList extends React.Component {
       )
   }
 }
+
+export default GoalList

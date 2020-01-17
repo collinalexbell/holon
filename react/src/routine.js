@@ -1,3 +1,7 @@
+import axios from 'axios'
+import React from 'react'
+
+
 class Routine extends React.Component {
   constructor(props) {
     super(props)
@@ -33,3 +37,5 @@ class Routine extends React.Component {
     )
   }
 }
+
+export default Routine;

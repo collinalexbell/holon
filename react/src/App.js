@@ -1,3 +1,8 @@
+import React from 'react';
+import './App.css';
+import RoutineApp from './routineApp'
+import GoalList from './goalList'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -46,7 +51,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export default App;

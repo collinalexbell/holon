@@ -1,3 +1,8 @@
+import React from 'react';
+import RoutineList from './routineList'
+import Routine from './routine'
+
+
 class RoutineApp extends React.Component {
   constructor(props) {
     super(props)
@@ -38,3 +43,5 @@ class RoutineApp extends React.Component {
     }
   }
 }
+
+export default RoutineApp

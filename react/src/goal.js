@@ -1,3 +1,5 @@
+import React from 'react';
+
 class Goal extends React.Component {
   constructor(props) {
     super(props)
@@ -14,3 +16,5 @@ class Goal extends React.Component {
     )
   }
 }
+
+export default Goal;
