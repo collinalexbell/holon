@@ -4,18 +4,17 @@ import Goal from './goal'
 class GoalList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {goals:props.goals}
   }
 
   mapGoals() {
-    console.log(this.state.goals)
-    return this.state.goals.map((goal, i) => {
-      return <li key={i}><Goal name={goal.name}/></li>
-    })}
+    console.log(this.props.goals)
+    return this.props.goals.map((goal, i) => {
+      return <li key={i}><Goal name={goal.name} complete={this.props.completeGoal(goal)}/></li>
+  })}
 
   render() {
     let home = <a href="#home" onClick={this.props.toHome}>To Home</a>
-    if(this.state.goals.length > 0)
+    if(this.props.goals.length > 0)
       return(
         <div>
           {home}

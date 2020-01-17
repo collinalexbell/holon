@@ -10,12 +10,24 @@ class App extends React.Component {
     super(props)
     this.state = {selection:"home", goals:[]}
     this.addRoutineToGoals = this.addRoutineToGoals.bind(this);
+    this.completeGoal = this.completeGoal.bind(this);
   }
 
   select(selection) {
     let that = this
     return function() {
       that.setState({selection:selection})
+    }
+  }
+
+  completeGoal(goal) {
+    let that = this;
+    return function(e) {
+      that.setState((state) => {
+        let index = that.state.goals.indexOf(goal)
+        state.goals.splice(index, 1)
+        return {goals: state.goals}
+      })
     }
   }
 
@@ -43,7 +55,10 @@ class App extends React.Component {
       case "goals":
         return (
           <div className='container'>
-          <GoalList goals={this.state.goals} toHome={this.select("home")}/>
+            <GoalList
+              goals={this.state.goals}
+              toHome={this.select("home")}
+              completeGoal={this.completeGoal}/>
           </div>
         )
       default:

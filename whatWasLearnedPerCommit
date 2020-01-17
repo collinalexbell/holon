@@ -1,0 +1,1 @@
+- when updating state, do not use state directly, but rather use the state that is passed to the function in setState

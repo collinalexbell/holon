@@ -7,11 +7,12 @@ class Goal extends React.Component {
   render() {
     return(
       <div>
-        <div class="goal-name">Goal: {this.props.name}</div>
+        <div className="goal-name">Goal: {this.props.name}</div>
         {this.props.description != undefined &&
           this.props.description.length > 0 &&
 
           <div class='goal-description'>Description: {this.props.description}</div>}
+        <button onClick={this.props.complete}>Complete</button>
       </div>
     )
   }
