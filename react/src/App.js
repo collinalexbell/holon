@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import RoutineApp from './routineApp'
 import GoalList from './goalList'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends React.Component {
   constructor(props) {
