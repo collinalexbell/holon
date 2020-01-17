@@ -34,15 +34,21 @@ class App extends React.Component {
     switch(this.state.selection) {
       case "routines":
         return (
-          <RoutineApp
-            toHome={this.select("home")}
-            addRoutineToTodo={this.addRoutineToGoals}/>
+          <div className='container'>
+            <RoutineApp
+              toHome={this.select("home")}
+              addRoutineToTodo={this.addRoutineToGoals}/>
+          </div>
           )
       case "goals":
-        return <GoalList goals={this.state.goals} toHome={this.select("home")}/>
+        return (
+          <div className='container'>
+          <GoalList goals={this.state.goals} toHome={this.select("home")}/>
+          </div>
+        )
       default:
         return (
-          <div>
+          <div className='container'>
             <a onClick={this.select("goals")} href="#goals">Goals</a>
             <br/>
             <a onClick={this.select("routines")} href="#routines">Routines</a>
