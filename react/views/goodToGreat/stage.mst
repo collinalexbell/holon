@@ -1,0 +1,8 @@
+<html>
+<head>
+</head>
+<body>
+  <h1>{{stage.name}}</h1>
+  {{> stagePartial}}
+</body>
+</html>

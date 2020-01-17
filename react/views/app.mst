@@ -1,0 +1,14 @@
+<html>
+<body>
+  <div id='root'></div>
+  <script src="/axios/dist/axios.min.js"></script>
+  <script type='text/javascript' src='/react/umd/react.development.js'></script>
+  <script type='text/javascript' src='/react-dom/umd/react-dom.development.js'></script>
+  <script type='text/javascript' src='/js/routine.js'></script>
+  <script type='text/javascript' src='/js/routineList.js'></script>
+  <script type='text/javascript' src='/js/routineApp.js'></script>
+  <script type='text/javascript' src='/js/goal.js'></script>
+  <script type='text/javascript' src='/js/goalList.js'></script>
+  <script type='text/javascript' src='/js/app.js'></script>
+</body>
+</html>

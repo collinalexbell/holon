@@ -1,0 +1,24 @@
+li {
+  width: 70%;
+}
+.active {
+  background-color: lightgray;
+}
+
+.cursor {
+  width: 0.5px;
+  display:inline;
+}
+
+.insert .active .cursor {
+  background-color: darkgrey;
+  animation-name: blink;
+  animation-duration: 800ms;
+  animation-iteration-count: infinite;
+  opacity: 1;
+}
+
+@keyframes blink {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
