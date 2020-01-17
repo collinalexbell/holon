@@ -1,0 +1,70 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="hello-ivy" default="shell">
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" debug="true" debuglevel="vars,lines,source">
+            <classpath refid="master-classpath"/>
+        </javac>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Holon.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="holon.shell.Shell"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="resolve" description="--> retrieve dependencies with Ivy">
+        <ivy:retrieve/>
+    </target>
+
+    <target name="testOne" depends="compile">
+        <junit showoutput="yes" printsummary="withOutAndErr" haltonfailure="yes">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <pathelement location="build/classes"/>
+                <pathelement path="build/classes"/>
+            </classpath>
+
+            <formatter type="plain"/>
+            <test name="${c}" todir="reports"/>
+        </junit>
+    </target>
+
+    <target name="test" depends="compile">
+        <junit printsummary="yes" haltonfailure="yes">
+
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <pathelement location="build/classes"/>
+                <pathelement path="build/classes"/>
+            </classpath>
+
+            <formatter type="plain"/>
+
+            <batchtest fork="yes" todir="reports">
+                <fileset dir="build/classes">
+                    <include name="**/*Test*.class"/>
+                    <exclude name="**/HumanRequiredTestUtility.class"/>
+                    <exclude name="**/TestRunner.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <path id="master-classpath">
+        <fileset dir="lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+</project>

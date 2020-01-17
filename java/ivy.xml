@@ -1,0 +1,13 @@
+<ivy-module version="2.0">
+    <info organisation="holon" module="holon"/>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+        <dependency org="org.apache.commons" name="commons-math3" rev="3.2"/>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency org="junit" name="junit" rev="4.12"/>
+
+        <dependency org="org.boofcv" name="boofcv-core" rev="0.34" />
+        <dependency org="org.boofcv" name="boofcv-swing" rev="0.34" />
+        <dependency org="org.boofcv" name="boofcv-WebcamCapture" rev="0.34" />
+    </dependencies>
+</ivy-module>
