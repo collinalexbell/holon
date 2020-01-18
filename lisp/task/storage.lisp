@@ -14,7 +14,7 @@
       (setf chirp::*oauth-access-secret*
 	    (cdr (assoc 'oauth-access-secret secrets))))))
 
-(load-secrets)
+;;(load-secrets) not using this at the moment
 
 
 (defun twitter-save-completed-task (task)

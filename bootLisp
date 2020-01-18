@@ -1,0 +1,2 @@
+cd lisp
+sbcl --eval '(asdf:load-system :holon)'
