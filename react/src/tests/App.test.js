@@ -13,16 +13,18 @@ test('renders 2 links: goals and routines', () => {
   expect(app.find('a')).toHaveLength(2)
 });
 
-test('clicking routines link renders RoutineApp', () => {
+function expectLinkClickToRender(text, component, n = 1) {
   const app = shallow(<App />);
-  const routines = app.find('a').filterWhere(comp => comp.text() == 'Routines')
+  const routines = app.find('a').filterWhere(comp =>
+    {return comp.text().toLowerCase() == text.toLowerCase()})
   routines.simulate('click')
-  expect(app.find(RoutineApp)).toHaveLength(1)
+  expect(app.find(component)).toHaveLength(n)
+}
+
+test('clicking routines link renders RoutineApp', () => {
+  expectLinkClickToRender("routines", RoutineApp)
 })
 
 test('clicking routines link renders RoutineApp', () => {
-  const app = shallow(<App />);
-  const goals = app.find('a').filterWhere(comp => comp.text() == 'Goals')
-  goals.simulate('click')
-  expect(app.find(GoalList)).toHaveLength(1)
+  expectLinkClickToRender("goals", GoalList)
 })
