@@ -28,7 +28,9 @@
      (onix-code-analyst .
       "A keeper and analyzer of open source code repos")
      (saphira .
-      "A versatile daemon interested in organic structures and the outdoors.")
+      "A versatile daemon interested in organic structures, progress, companionship, and high octane yet safe activities.")
+     (saphira-camp .
+      "A high tech mobile campsite")
      (shelfie .
       "A daemon with robotic arm for book shelf item manipulation")
      (gia .
@@ -68,4 +70,6 @@
      (holon-lisp .
       "A lisp compiler and dialect for VelOs")
      (VelOs .
-      "A small and speedy Common Lisp OS for Cyborgs"))))
+      "A small and speedy Common Lisp OS for Cyborgs")
+     (Sudo .
+      "A light humanoid robot"))))
