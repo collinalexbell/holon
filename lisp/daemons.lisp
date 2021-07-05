@@ -7,9 +7,14 @@
           (slot-value daemon 'description)))
 (defun products ()
   (mapcar
-   (lambda (item) (make-instance 'daemon :name (car item) :description (cdr item)))
+   (lambda (item) (make-instance 'daemon
+                                 :name (car item)
+                                 :description (if (listp (cdr item))
+                                                  (cdr (assoc :description (cdr item)))
+                                                  (cdr item))))
    '((sherlock .
-      "Hardware looks like a game controller with a pocket daemon installed")
+      ((:description .
+        "Hardware looks like a game controller with a pocket daemon installed")))
      (pocket-daemon .
       "Handheld daemon gadget terminal composed of an RPi, small touch screen, and lots of USB goodies. Tight Tactical Gear for dense urban environments")
      (cybook .
@@ -20,6 +25,8 @@
       "Platform robot meant for deploying smaller machines")
      (onix-battlestation .
       "A colleague daemon battlestation meant for hardcore work (navy seal cybernetics)")
+     (onix-code-analyst .
+      "A keeper and analyzer of open source code repos")
      (saphira .
       "A versatile daemon interested in organic structures and the outdoors.")
      (shelfie .
@@ -53,4 +60,12 @@
      (onix-bot .
       "A robotic body for onix")
      (giactory .
-      "Daemon for farm. To live on Colorado property"))))
+      "Daemon for farm. To live on Colorado property")
+     (shot-sentry .
+      "A medium/long range camera set to fully auto")
+     (hyperdriver .
+      "A cyberglove input system for hypernerds")
+     (holon-lisp .
+      "A lisp compiler and dialect for VelOs")
+     (VelOs .
+      "A small and speedy Common Lisp OS for Cyborgs"))))
