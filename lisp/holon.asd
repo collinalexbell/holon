@@ -20,3 +20,17 @@
                (:file "gui")
                (:file "purpose")
                (:file "behavioural-exceptions")))
+
+
+;; how to load holon after booting
+; kuberlog
+; <password>
+; startx
+; cmd+d
+; emacs
+; <enter>
+; c-x c-f /home/kuberlog/code/holon/lisp/holon.asd
+; slime
+; (asdf:load-system :holon)
+; 5 (on error)
+

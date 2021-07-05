@@ -25,9 +25,6 @@
                  [org.clojure/math.numeric-tower "0.0.4"]
                  [korma "0.4.3"]
                  [org.postgresql/postgresql "9.4.1208"]]
-  :repositories {"sonatype-oss-public" "https://oss.sonatype.org/content/groups/public/"}
-  :plugins [[lein-ns-dep-graph "0.1.0-SNAPSHOT"]
-            [cider/cider-nrepl "0.13.0"]]
   :jvm-opts ^:replace []
   :main daemon.core)
 
