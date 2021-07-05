@@ -36,4 +36,6 @@
    (helm .
     "HUD for cyborgs")
    (kuberdog-console
-    "holonic + pocket-daemon + sherlock for dogs")))
+    "holonic + pocket-daemon + sherlock for dogs")
+   (plastois .
+    "A 3d printer")))
