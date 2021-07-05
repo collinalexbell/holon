@@ -35,7 +35,13 @@
     "Cybernetic backpack")
    (helm .
     "HUD for cyborgs")
-   (kuberdog-console
+   (kuberdog-console .
     "holonic + pocket-daemon + sherlock for dogs")
    (plastois .
-    "A 3d printer")))
+    "A 3d printer")
+   (onix .
+    "A professional trainer/mentor in productivity and performace")
+   (onix-bot .
+    "A robotic body for onix")
+   (giactory .
+    "Daemon for farm. To live on Colorado property")))
