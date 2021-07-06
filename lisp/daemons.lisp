@@ -1,22 +1,54 @@
+(defpackage :holon.daemons (:use :cl))
+(in-package :holon.daemons)
 
-(defclass daemon () ((name :initarg :name) (description :initarg :description)))
+(defclass daemon () (
+                     (name :initarg :name)
+                     (description :initarg :description)
+                     (approx-marginal-cost :initarg :approx-marginal-cost :initform nil)))
+
 
 (defun print-daemon (daemon)
-  (format t "name: ~a~%description: ~a~%"
-          (slot-value daemon 'name)
-          (slot-value daemon 'description)))
+  (let ((marginal-cost (slot-value daemon 'approx-marginal-cost)))
+
+    (format t (concatenate 'string
+                           "name: ~a~%description: ~a~%"
+                           (if (not (null marginal-cost)) "approx-marginal-cost: ~a~%" "")
+                           "~%")
+
+            (slot-value daemon 'name)
+            (slot-value daemon 'description)
+            (if (not (null marginal-cost))
+                marginal-cost
+                ""))))
+
+(defun serialize (daemon)
+  `(,(slot-value daemon 'name) .
+    ((:description . ,(slot-value daemon 'description))
+     (:approx-marginal-cost . ,(slot-value daemon 'approx-marginal-cost)))))
+
 (defun products ()
   (mapcar
    (lambda (item) (make-instance 'daemon
                                  :name (car item)
+
                                  :description (if (listp (cdr item))
                                                   (cdr (assoc :description (cdr item)))
-                                                  (cdr item))))
+                                                  (cdr item))
+
+                                 :approx-marginal-cost
+                                 (if (listp (cdr item))
+                                     (cdr (assoc :approx-marginal-cost
+                                                 (cdr item)))
+                                     nil)))
    '((sherlock .
       ((:description .
-        "Hardware looks like a game controller with a pocket daemon installed")))
+        "Hardware looks like a game controller with a pocket daemon installed")
+       (:approx-marginal-cost . 20)))
+
      (pocket-daemon .
-      "Handheld daemon gadget terminal composed of an RPi, small touch screen, and lots of USB goodies. Tight Tactical Gear for dense urban environments")
+      ((:description "Handheld daemon gadget terminal composed of an RPi, small touch screen, and lots of USB goodies. Tight Tactical Gear for dense urban environments")
+       (:approx-marginal-cost . 100)))
+
      (cybook .
       " A digital book experience ran on a PiZero. To be enjoyed with real book and beer.")
      (daemon-head .
@@ -73,3 +105,6 @@
       "A small and speedy Common Lisp OS for Cyborgs")
      (Sudo .
       "A light humanoid robot"))))
+
+(defun print-all-products ()
+  (mapcar #'print-daemon (products)))

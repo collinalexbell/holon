@@ -19,6 +19,7 @@
                (:file "pomodoro")
                (:file "gui")
                (:file "purpose")
+               (:file "deamons")
                (:file "behavioural-exceptions")))
 
 
