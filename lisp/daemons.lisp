@@ -1,8 +1,8 @@
-(defpackage :holon.daemons (:use :cl))
+(defpackage :holon.daemons (:use :cl) (:export name print-daemon products))
 (in-package :holon.daemons)
 
 (defclass daemon () (
-                     (name :initarg :name)
+                     (name :initarg :name :accessor name)
                      (description :initarg :description)
                      (approx-marginal-cost :initarg :approx-marginal-cost :initform nil)))
 
@@ -10,7 +10,7 @@
 (defun print-daemon (daemon)
   (let ((marginal-cost (slot-value daemon 'approx-marginal-cost)))
 
-    (format t (concatenate 'string
+    (format nil (concatenate 'string
                            "name: ~a~%description: ~a~%"
                            (if (not (null marginal-cost)) "approx-marginal-cost: ~a~%" "")
                            "~%")
