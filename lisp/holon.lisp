@@ -12,6 +12,9 @@
    (superior-holons :initform '() :initarg :superior-holons)
    (state :initform 'intact)))
 
+(defun holon ()
+  (make-instance 'holon))
+
 (defun cascade (holon fn)
   (funcall fn holon)
   (loop for holon in (slot-value holon 'inferior-holons)
