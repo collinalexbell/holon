@@ -1,17 +1,11 @@
-# Holon is a system of thought.
-## This is a mono repo for the following OLD projects
-- [Holon Lisp](https://github.com/kuberlog/holon-lisp)
-- [Daemon](https://github.com/kuberlog/daemon)
-- [Web Holon](https://github.com/kuberlog/web-holon)
-- [Holon Java](https://github.com/kuberlog/Java-Aristotle)
+# An expiriement in Lisp to codify my thought processes.
 
-## Instructions
-```
-cd node
-npm install
-cd ../react
-npm install
-cd ..
-./start
-```
-This will open up localhost:3000
+The word holon represents a self-stable unit of being.
+
+A holon can transcend to form other holons (eg: governments).
+
+It can also disintegrate into inferior holons (eg: cells).
+
+
+<img src="./imgs/tree_of_life.png" height="250">
+
