@@ -1,4 +1,4 @@
-# An expiriement in Lisp to codify my thought processes.
+# An expiriement in many languages to codify my thought processes.
 
 The word holon represents a self-stable unit of being.
 
