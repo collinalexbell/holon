@@ -13,6 +13,7 @@
                (:file "restrictions")
                (:file "task/init")
                (:file "human")
+               (:file "commitment")
                (:file "i")
                (:file "youtube")
                (:file "mastery")

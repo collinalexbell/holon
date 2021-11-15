@@ -28,8 +28,9 @@
 (defun review-commitments (commitments)
   (dolist (commitment (nshuffle commitments))
     (format t "Meditate about: ~a~%" commitment)
-    (sleep (* 3))
-    (sb-ext:run-program "/bin/play" '("sounds/beep.mp3"))))
+    (sleep (* 10 1))
+    ;(sb-ext:run-program "/bin/play" '("sounds/beep.mp3"))
+    ))
 
 (defun review-commitments* ()
   (review-commitments (my-commitments)))
