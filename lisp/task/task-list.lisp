@@ -52,6 +52,11 @@
   (redisplay)
   (backup *root-task*))
 
+(defun add-tasks (&optional (tasks '()))
+  ;;tasks is a list of tasks
+  (loop for task in tasks
+        do (add-task task)))
+
 (define-test add-task-test
   (let (((inferior-holons *selected-task*) '())
 	(*selected-group* 'foo))
