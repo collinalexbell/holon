@@ -31,8 +31,6 @@
   (format t "An abstract holon is like a mathematical point.~%Therefore, there is nothing to it, so it can't be renewed"))
 
 (defmethod disolve ((holon holon))
-  (dolist (inferior-holon (slot-value holon 'inferior-holons))
-    (disolve inferior-holon))
   (setf (slot-value holon 'state) 'disolved))
 
 (defmethod with-website ((holon holon) website)
