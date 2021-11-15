@@ -1,4 +1,4 @@
-(in-package :task)
+(in-package :holon.task)
 
 (defun complete ()
   (when (or (null (subtasks *selected-task*))

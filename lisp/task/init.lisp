@@ -3,11 +3,11 @@
 (ql:quickload :parachute)
 (ql:quickload :postmodern)
 
-(defpackage :task
+(defpackage :holon.task
   (:use :cl :parachute :postmodern :holon)
   (:export :select :complete :deselect :add-task :tasks))
 
-(in-package :task)
+(in-package :holon.task)
 
 (defun run-all-package-tests ()
   (dolist (test-name

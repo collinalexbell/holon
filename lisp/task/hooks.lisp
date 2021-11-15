@@ -1,6 +1,6 @@
 (ql:quickload :trivial-open-browser)
 
-(in-package :task)
+(in-package :holon.task)
 
 (defun hook-select-smile (the-task)
   (format t "Please smile~%")

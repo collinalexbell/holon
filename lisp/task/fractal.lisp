@@ -1,6 +1,7 @@
 ; code won't work until #'select operates on task objects
 ; won't work until #'add-task returns task obj
 
+(in-package :holon.task)
 
 ;; Adds 10 '(post to insta) tasks each with an increasing number of sub tasks
 (defun spiral ()

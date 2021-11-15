@@ -1,3 +1,4 @@
+(in-package :holon.task)
 (defclass task (holon)
   ((description :accessor task-description
 		:initarg :description)
