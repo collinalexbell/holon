@@ -1,5 +1,6 @@
 (defpackage :holon.cybernetics.parts (:use :cl))
 (in-package :holon.cybernetics.parts)
+
 (defmacro def-parts-category (name parts)
   `(defparameter ,name ,parts))
 
