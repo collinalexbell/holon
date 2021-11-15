@@ -1,6 +1,7 @@
 
 (defpackage :youtube
-  (:use :task :cl))
+  (:use :holon.task :cl))
+(in-package :youtube)
 
 (defparameter todays-topic 'holon)
 
@@ -29,6 +30,7 @@
     (tasks)))
 
 
-(defun run ()
-  (next-topic)
-  (provoke-youtube-video-creation))
+(defun run (x)
+  (loop repeat x
+        do (progn (next-topic)
+                  (provoke-youtube-video-creation))))
