@@ -25,14 +25,9 @@
 
 (defgeneric renew (holon))
 (defgeneric disolve (holon))
-(defgeneric with-website (holon website))
 
 (defmethod renew ((holon holon))
   (format t "An abstract holon is like a mathematical point.~%Therefore, there is nothing to it, so it can't be renewed"))
 
 (defmethod disolve ((holon holon))
   (setf (slot-value holon 'state) 'disolved))
-
-(defmethod with-website ((holon holon) website)
-  (setf (inferior-holons holon) (cons website (inferior-holons holon)))
-  holon)
