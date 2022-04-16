@@ -1,2 +1,2 @@
 # holon lisp
-![](./tree-of-lisp.png)
+<img src=".tree_of_lisp.png" height="250">
