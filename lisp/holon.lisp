@@ -9,7 +9,9 @@
    (inferior-holons :initform '()
 		    :initarg :inferior-holons
 		    :accessor inferior-holons)
-   (superior-holons :initform '() :initarg :superior-holons)
+   (superior-holons :initform '()
+                    :initarg :superior-holons
+                    :accessor superior-holons)
    (state :initform 'intact)))
 
 (defun holon ()
