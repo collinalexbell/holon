@@ -12,4 +12,5 @@
                  :name rangers-name))
 
 
-(defvar I ())
+(defvar I (new-cyber-ranger "collin"))
+(defvar collin I)
