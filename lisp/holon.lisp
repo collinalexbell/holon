@@ -29,8 +29,6 @@
   (cascade holon #'renew))
 (defgeneric renew (holon))
 (defgeneric disolve (holon))
-
-
 (defmethod link ((a holon) (b holon ))
   (loop for i in (list a b) do
        (let ((links (parallel-holons i)))

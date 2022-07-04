@@ -41,17 +41,6 @@
   (unless (null *selected-task*) (complete))
   (select))
 
-(define-test test-select
-  (let (((slot-value *selected-task* 'inferior-holons) '())
-        (*selected-task* nil))
-    (add-task '(test select))
-    (select)
-    (true (eq '(test select) (task-description *selected-task*)))
-    (setf task::*selected-task* nil)
-    (add-task '(test select 2))
-    (select 1)
-    (true (eq '(test select) (task-description *selected-task*)))))
-
 (defun tasks ()
   (print-all-task-info))
 

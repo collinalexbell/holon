@@ -5,7 +5,8 @@
                                 (read decision-file)))
 
 (defun save ()
-  (write global-decisions :stream decision-file))
+  (with-open-file (decision-file "decisions" :direction :output :if-exists :overwrite)
+   (write global-decisions :stream decision-file)))
 
 (defun make (description)
   (setf global-decisions (cons description global-decisions))
