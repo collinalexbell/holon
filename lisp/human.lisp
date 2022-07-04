@@ -1,7 +1,8 @@
 (in-package :holon)
 
 (defclass human (holon)
-  (tasks))
+  (tasks
+   (profession :initform '() :initarg :accessor profession)))
 
 (defmacro with-human (the-human body))
 
