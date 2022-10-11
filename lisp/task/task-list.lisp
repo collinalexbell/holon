@@ -57,7 +57,7 @@
   (loop for task in tasks
         do (add-task task)))
 
-(define-test add-task-test
+(parachute:define-test add-task-test
   (let (((inferior-holons *selected-task*) '())
 	(*selected-group* 'foo))
     (add-task '(all i do is test) :task-groups '(test))
@@ -89,7 +89,7 @@
   (gen-hook *selected-task* 'complete)
   (delete-task item))
 
-(define-test t-complete-task
+(parachute:define-test t-complete-task
   (let* (((inferior-holons *selected-task*) '())
 	 (*selected-task* nil)
 	 (*derp* nil)
@@ -107,7 +107,7 @@
   (setf (inferior-holons *selected-task*)
         (delete item (inferior-holons *selected-task*) :test #'equal)))
 
-(define-test t-delete-task
+(parachute:define-test t-delete-task
   (let (((inferior-holons *selected-task*) '())
 	(*selected-task* nil))
     (add-task '(all i do is win))
@@ -136,7 +136,7 @@
 	     (gen-hook *selected-task* 'select))
       (format t "Item does not exist in task list")))
 
-(define-test t-select-task
+(parachute:define-test t-select-task
   (let (((inferior-holons *selected-task*) '())
 	 (*selected-task* nil))
      (add-task '(become a millionaire))
@@ -149,7 +149,7 @@
 	:test #'(lambda (item task)
 		  (if (equal item (task-description task)) t nil))))
 
-(define-test t-find-task
+(parachute:define-test t-find-task
   (let* (((inferior-holons *selected-task*) '()))
     (add-task '(all i do is test))
     (true (equal

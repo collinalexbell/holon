@@ -31,7 +31,7 @@
     (incf (task-selected-duration the-task) time-diff)
     (values (task-selected-duration the-task) time-diff)))
 
-(define-test t-accumulate-work-time
+(parachute:define-test t-accumulate-work-time
   (let ((task (make-instance 'task)))
     (setf (last-selected-time task) (get-universal-time))
     (setf (task-selected-duration task) 500)

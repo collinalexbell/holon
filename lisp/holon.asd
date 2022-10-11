@@ -1,3 +1,4 @@
+(require 'asdf)
 (defsystem "holon"
   :description "a conceptual context"
   :version "1.0"

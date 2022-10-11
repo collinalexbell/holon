@@ -4,16 +4,17 @@
 (ql:quickload :postmodern)
 
 (defpackage :holon.task
-  (:use :cl :parachute :postmodern :holon)
+  (:use :cl :postmodern :holon)
   (:export :select :complete :deselect :add-task :tasks))
 
+(require :parachute)
 (in-package :holon.task)
 
 (defun run-all-package-tests ()
   (dolist (test-name
 	   '(t-delete-task t-select-task t-find-task
 	     t-complete-task))
-    (test test-name)))
+    (parachute:test test-name)))
 
 (defun init ()
   (load "task/task.lisp")
