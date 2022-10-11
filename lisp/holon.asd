@@ -5,6 +5,8 @@
   (require 'asdf)  :license "Public Domain"
   :depends-on ("parachute"
                "postmodern"
+               "cl-store"
+               "inferior-shell"
                "cl-cffi-gtk")
   :components ((:file "holon")
                (:file "love")
