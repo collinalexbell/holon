@@ -2,7 +2,7 @@
   :description "a conceptual context"
   :version "1.0"
   :author "Collin Bell <collinalexbelL@gmail.com>"
-  :license "Public Domain"
+  (require 'asdf)  :license "Public Domain"
   :depends-on ("parachute"
                "postmodern"
                "cl-cffi-gtk")
@@ -22,6 +22,8 @@
                (:file "purpose")
                (:file "deamons")
                (:file "behavioural-exceptions")))
+
+;; (ql:quickload :holon) to install dependencies
 
 
 ;; how to load holon after booting
