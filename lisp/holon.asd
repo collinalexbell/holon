@@ -2,7 +2,7 @@
   :description "a conceptual context"
   :version "1.0"
   :author "Collin Bell <collinalexbelL@gmail.com>"
-  (require 'asdf)  :license "Public Domain"
+  :license "Public Domain"
   :depends-on ("parachute"
                "postmodern"
                "cl-store"
