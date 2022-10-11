@@ -16,14 +16,14 @@
                (:file "restrictions")
                (:file "task/init")
                (:file "human")
-               (:file "commitment")
+               (:file "commitment/commitment")
                (:file "i")
                (:file "youtube")
                (:file "mastery")
                (:file "pomodoro")
                (:file "gui")
                (:file "purpose")
-               (:file "deamons")
+               (:file "daemons")
                (:file "behavioural-exceptions")))
 
 ;; (ql:quickload :holon) to install dependencies
