@@ -47,3 +47,8 @@
 ;; - Large-Scale Structue and Modularity
 ;; - Object-Oriented Programming
 ;; - Operations on Aggregates
+
+(defun heron-sqrt (x &optional (guess 1))
+  (if (< (abs (- x (* guess guess))) 0.1)
+      guess
+      (heron-sqrt x (/ (+ guess (/ x guess)) 2))))
