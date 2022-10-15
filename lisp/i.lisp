@@ -15,3 +15,5 @@
                            '(mind body)
                            (slot-value I 'inferior-holons))))))
 (init-I)
+
+(setf (inferior-holons I) (cons (familiar 'Zeus 'Poodle) (inferior-holons I)) )
