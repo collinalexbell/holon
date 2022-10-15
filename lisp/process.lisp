@@ -48,7 +48,13 @@
 ;; - Object-Oriented Programming
 ;; - Operations on Aggregates
 
-(defun heron-sqrt (x &optional (guess 1))
-  (if (< (abs (- x (* guess guess))) 0.1)
+(defun improve (x guess)
+  (heron-sqrt x (/ (+ guess (/ x guess)) 2)))
+
+(defun is-good-enough  (x guess)
+  (< (abs (- x (* guess guess))) 0.1))
+
+(defun heron-sqrt (x &optional (guess 1.0))
+  (if (is-good-enough x guess)
       guess
-      (heron-sqrt x (/ (+ guess (/ x guess)) 2))))
+      (improve x guess)))
