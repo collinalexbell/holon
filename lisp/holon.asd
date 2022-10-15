@@ -1,9 +1,9 @@
 (require 'asdf)
 (defsystem "holon"
   :description "a conceptual context"
-  :version "1.0"
-  :author "Collin Bell <collinalexbelL@gmail.com>"
-  :license "Public Domain"
+  :version "1.1"
+  :author "kuberlog <collinalexbelL@gmail.com>"
+  :license "tree"
   :depends-on ("parachute"
                "postmodern"
                "cl-store"
