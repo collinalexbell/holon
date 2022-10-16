@@ -58,3 +58,19 @@
   (if (is-good-enough x guess)
       guess
       (improve x guess)))
+
+(parachute:define-test t-heron-sqrt-small
+  (let* ((x 16)
+         (result (heron-sqrt x)))
+   (parachute:true (< (abs (- x (* result result))) 0.1))))
+
+(parachute:define-test t-heron-sqrt-large
+  (let* ((x 25000)
+         (result (heron-sqrt x)))
+    (format t "result: ~s" result)
+    (parachute:true
+     (< (abs (- x (* result result))) 0.1))))
+
+(defparameter tests
+  '(t-heron-sqrt-small t-heron-sqrt-large))
+(dolist (test tests) (parachute:test test))
