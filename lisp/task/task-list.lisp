@@ -25,6 +25,9 @@
 (defun save-tasks (&optional (file-name *global-save-file*))
   (cl-store:store (inferior-holons *selected-task*) file-name))
 
+(defun reload-tasks ()
+  (setf (inferior-holons *root-task*) (cl-store:restore *global-save-file*)))
+
 (defun redisplay ()
   (save-tasks)
   (tasks))
