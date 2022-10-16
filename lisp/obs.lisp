@@ -1,3 +1,6 @@
+(ql:quickload :cepl)
+(in-package :holon)
+
 (defun rename (video name)
   ;; to be implemented, placeholder list rv
   `(,video ,name))
