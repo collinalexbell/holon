@@ -24,3 +24,10 @@
       ',description
       ',why
       ',key-skills)))
+
+(defun serialize-goal (goal)
+  (list
+   (slot-value goal 'name)
+   (slot-value goal 'description)
+   (slot-value goal 'why)
+   (slot-value goal 'key-skills)))
