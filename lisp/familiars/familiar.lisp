@@ -5,10 +5,10 @@
   `(familiar . (,name ,breed)))
 
 (defun familiar-say-hello (familiar)
-  (format t "hello, I am ~s~%" familiar))
+  (format nil "hello, I am ~s~%" (cadr familiar)))
 
 (defun familiar-lets-go (familair)
-  (format t "~s, lets go" familair))
+  (format nil "~s, lets go" (cadr familair)))
 
 (defun say (words)
   (inferior-shell:run (concatenate 'string "say " words)))

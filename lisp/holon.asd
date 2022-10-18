@@ -7,11 +7,11 @@
   :depends-on ("parachute"
                "postmodern"
                "cl-store"
-               "inferior-shell"
-               "cl-cffi-gtk")
+               "inferior-shell")
   :components ((:file "holon")
                (:file "love")
                (:file "focus")
+               (:file "familiar")
                (:file "goals")
                (:file "restrictions")
                (:file "task/init")
@@ -22,8 +22,6 @@
                (:file "youtube")
                (:file "mastery")
                (:file "pomodoro")
-               (:file "gui")
-               (:file "purpose")
                (:file "daemon/daemons")
                (:file "behavioural-exceptions")))
 
