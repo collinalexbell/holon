@@ -18,5 +18,11 @@
 (defun new-human (name)
   (make-instance 'human :name name))
 
-(defun move (human position)
-  (setf (positions human) (add-position (positions human))))
+(defun moved (human position)
+  (setf (positions human) (add-position (positions human) position)))
+
+(defun save (human file)
+  (cl-store:store human file))
+
+(defun restore (file)
+  (cl-store:restore file))

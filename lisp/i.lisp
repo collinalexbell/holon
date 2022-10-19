@@ -3,6 +3,7 @@
 (in-package :holon)
 
 (defun init-I ()
+  ; create a new I if one can't be loaded
   (if (not (boundp 'I))
       (progn
         (defvar I (new-human 'Collin))
@@ -14,7 +15,10 @@
               (concatenate 'list
                            '(mind body)
                            (slot-value I 'inferior-holons))))))
-(init-I)
+
+;; run this if on a new system
+;(init-i)
+(restore "i.holon")
 
 (setf (inferior-holons I) (cons (familiar 'Zeus 'Poodle) (inferior-holons I)) )
 
