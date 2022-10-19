@@ -4,7 +4,11 @@
    (profession
     :initform '()
     :initarg profesion
-    :accessor profession)))
+    :accessor profession)
+   (positions
+    :initform '()
+    :initarg positions
+    :accessor positions)))
 
 (defmacro with-human (the-human body))
 
@@ -13,3 +17,6 @@
 
 (defun new-human (name)
   (make-instance 'human :name name))
+
+(defun move (human position)
+  (setf (positions human) (add-position (positions human))))

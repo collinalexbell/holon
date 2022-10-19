@@ -20,3 +20,4 @@
 
 (defun my-familiars ()
   (remove-if #'(lambda (holon) (not (and (listp holon) (eq 'familiar (car holon))))) (inferior-holons I)))
+
