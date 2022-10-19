@@ -11,7 +11,6 @@
   :components ((:file "holon")
                (:file "love")
                (:file "focus")
-               (:file "familiar")
                (:file "goals")
                (:file "restrictions")
                (:file "task/init")
