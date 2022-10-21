@@ -2,6 +2,16 @@
 (in-package :holon)
 (import :holon.daemons)
 
+;(defclass corporation (holon)
+;  ((share-holders)
+;   (urls)
+;   (products)
+;   (services)
+;   (customers)))
+
+;(defparameter *tree-cybernetics* (let (( corp (make-instance 'corporation)))))
+
+
 (defun find-daemon (name)
   (find name
         (holon.daemons:products)
