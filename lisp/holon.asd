@@ -17,6 +17,7 @@
                (:file "human")
                (:file "commitment/commitment")
                (:file "familiars/familiar")
+               (:file "position")
                (:file "i")
                (:file "youtube")
                (:file "mastery")

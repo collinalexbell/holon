@@ -18,7 +18,7 @@
 
 ;; run this if on a new system
 ;(init-i)
-(restore "i.holon")
+(defvar I (restore "i.holon"))
 
 (setf (inferior-holons I) (cons (familiar 'Zeus 'Poodle) (inferior-holons I)) )
 
