@@ -5,7 +5,7 @@
 
 (defpackage :holon.task
   (:use :cl :postmodern :holon)
-  (:export :select :complete :deselect :add-task :tasks))
+  (:export :select :complete :deselect :add-task :tasks :*selected-task*))
 
 (require :parachute)
 (in-package :holon.task)
