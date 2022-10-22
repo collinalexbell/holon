@@ -14,7 +14,8 @@
         (setf (slot-value I 'inferior-holons)
               (concatenate 'list
                            '(mind body)
-                           (slot-value I 'inferior-holons))))))
+                           (slot-value I 'inferior-holons)))
+        (setf (slot-value I 'inferior-holons) (cons holon.task:*selected-task* (inferior-holons I))))))
 
 ;; run this if on a new system
 ;(init-i)
