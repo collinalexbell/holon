@@ -5,6 +5,7 @@
 (in-package :holon)
 
 (defclass holon ()
+  ;; A simultanous whole and part-of-a-whole
   ((name :initarg :name)
    (inferior-holons :initform '()
 		    :initarg :inferior-holons
