@@ -26,3 +26,7 @@ speech-to-text.wav
 /resources/tests/
 project_bak.org
 /lisp/goals
+/lisp/lisp-koans
+/lisp/task-log
+/lisp/task/.task.backup
+/lisp/current.task-list
