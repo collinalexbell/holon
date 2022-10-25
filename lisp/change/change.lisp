@@ -1,6 +1,10 @@
 (in-package :holon)
 
 
+;; this idea was stolen from Tony Robbins
+;; and encoded into lisp
+;; cc* Tony
+
 (defun get-leverage (change-to-be-made)
   (change-pleasure-link change-to-be-made)
   (change-pain-link change-to-be-made))
@@ -23,3 +27,6 @@
 (defun change (change-to-be-made)
   (get-leverage change-to-be-made)
   (apply-leverage change-to-be-made))
+
+
+; *cc -> creative commons
