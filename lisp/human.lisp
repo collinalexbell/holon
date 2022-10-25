@@ -10,7 +10,11 @@
     :initarg positions
     :accessor positions)))
 
-(defmacro with-human (the-human body))
+(defmacro with-human (the-human &rest body)
+  ;; threads the human through firt argument of all forms in body
+  ;; body should like body of progn or defun
+  (cons 'progn
+     (loop for form in body collect (cons (car form) (cons the-human (cdr form))))))
 
 (defmethod renew ((person human))
   (format t "Have a good rest human."))
