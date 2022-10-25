@@ -23,7 +23,9 @@
       ((:description "Handheld daemon gadget terminal composed of an RPi, small touch screen, and lots of USB goodies. Tight Tactical Gear for dense urban environments")
        (:approx-marginal-cost . 100)))
      (cybook .
-      " A digital book experience ran on a PiZero. To be enjoyed with real book and beer.")
+      "A digital book experience ran on a PiZero. To be enjoyed with real book and beer.")
+     (chiron .
+      "A friend and tutor for Zeus")
      (daemon-head .
       "A medium physical head and neck for a daemon. Fits RPi Daemons.")
      (wray .
