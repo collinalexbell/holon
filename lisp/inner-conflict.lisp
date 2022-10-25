@@ -1,8 +1,7 @@
-(in-package :holon)
+(defpackage :holon.guru (:use :cl))
+(in-package :holon.guru)
 
-(defun become-congruent-about (x)
-  (re-align-conflicting-values
-   (concatenate 'list `(,(identify-inner-conflict-about x)) `(,x))))
+;; again, this was stolen directly from Tony Robbins
 
 
 (defun identify-inner-conflict-about (x)
@@ -17,3 +16,8 @@
   (read-line)
   (format t "Think about how to balance these values and write the new plan~%")
   (read-line))
+
+(defun become-congruent-about (x)
+  (re-align-conflicting-values
+   (concatenate 'list `(,(identify-inner-conflict-about x)) `(,x))))
+

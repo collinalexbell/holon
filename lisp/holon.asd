@@ -25,7 +25,8 @@
                (:file "pomodoro")
                (:file "daemon/Daemon")
                (:file "daemon/daemons")
-               (:file "behavioural-exceptions")))
+               (:file "behavioural-exceptions")
+               (:file "inner-conflict")))
 
 ;; (ql:quickload :holon) to install dependencies
 
