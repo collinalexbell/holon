@@ -2,6 +2,8 @@
 
 ;;; Will not run, macro `with-holon` not yet defined
 
+
+;; when you really want to be a robot
 (defun shower (human)
   (with-human human
     (choose-post-shower-clothing)
