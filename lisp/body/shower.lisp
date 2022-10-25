@@ -1,6 +1,6 @@
 (in-package :holon)
 
-;;; Will not run, macro `with-holon` not yet defined
+;;; Will not run, all the functions aren't defined yet
 
 
 (defun shower (human)

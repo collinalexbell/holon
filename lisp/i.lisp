@@ -21,7 +21,7 @@
 ;(init-i)
 (defvar I (restore "i.holon"))
 
-(setf (inferior-holons I) (cons (familiar 'Zeus 'Poodle) (inferior-holons I)) )
+(setf (inferior-holons I) (cons (familiar 'Zeus 'Poodle) (inferior-holons I)))
 
 (defun my-familiars ()
   (remove-if #'(lambda (holon) (not (and (listp holon) (eq 'familiar (car holon))))) (inferior-holons I)))
