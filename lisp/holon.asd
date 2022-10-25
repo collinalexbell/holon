@@ -22,6 +22,7 @@
                (:file "youtube")
                (:file "mastery")
                (:file "pomodoro")
+               (:file "daemon/Daemon")
                (:file "daemon/daemons")
                (:file "behavioural-exceptions")))
 
