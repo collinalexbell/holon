@@ -2,12 +2,12 @@
 ;; Created: 2018-10-08
 
 
-(defpackage :commitment
+(defpackage :holon.commitment
   (:use :cl))
 
-(in-package :commitment)
+(in-package :holon.commitment)
 
-(defparameter *commitment-file* "/home/alex/Documents/collin.commitments")
+(defparameter *commitment-file* "commitments.holon")
 (defun my-commitments ()
   (with-open-file (f *commitment-file* :direction :input)
     (read f)))
