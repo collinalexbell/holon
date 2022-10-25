@@ -2,6 +2,7 @@
 (in-package :holon)
 
 (defclass goal ()
+  ;; This is a pretty fleshed out goal class
     ((name :initarg :name)
      (description :initarg :description)
      (why-do-it :initarg :why)
