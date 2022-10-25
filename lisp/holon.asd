@@ -19,6 +19,7 @@
                (:file "familiars/familiar")
                (:file "position")
                (:file "i")
+               (:file "corporation")
                (:file "youtube")
                (:file "mastery")
                (:file "pomodoro")

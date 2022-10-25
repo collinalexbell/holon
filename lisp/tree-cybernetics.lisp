@@ -2,14 +2,15 @@
 (in-package :holon)
 (import :holon.daemons)
 
-;(defclass corporation (holon)
-;  ((share-holders)
-;   (urls)
-;   (products)
-;   (services)
-;   (customers)))
 
-;(defparameter *tree-cybernetics* (let (( corp (make-instance 'corporation)))))
+(defparameter *tree-cybernetics* (let (( tree-inc (make-instance 'Corporation)))
+                                   ;; initialize tree cybernetics here
+                                   (setf (slot-value tree-inc 'share-holders) 'kuberlog)
+                                   (setf (slot-value tree-inc 'urls) '())
+                                   (setf (slot-value tree-inc 'urls) (holon.daemons:products))
+                                   (setf (slot-value tree-inc 'services) '((code explainations)))
+                                   (setf (slot-value tree-inc 'customers) '())
+                                   tree-inc))
 
 
 (defun find-daemon (name)

@@ -1,6 +1,7 @@
 
+(in-package :holon)
 
-(defclass corporation (holon)
+(defclass Corporation (holon)
   ((share-holders)
    (urls)
    (products)
