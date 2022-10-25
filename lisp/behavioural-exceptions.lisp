@@ -1,5 +1,9 @@
 (in-package :holon)
 
+;; this file is not great, but it was a fun experiment that I remember doing
+;; it will stay because I think the expriment was a good one, but the resultant
+;; procedure is not one I will probably want to run again
+
 
 (defun how-much-negativity ()
   (format t "What level of negativity (1-5) is my thinking?~%")
