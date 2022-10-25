@@ -1,8 +1,8 @@
 (load "holon.lisp")
 (load "profession.lisp")
-(defpackage :cyber-ranger (:use :cl :holon :profession))
+(defpackage :holon.cyber-ranger (:use :cl :holon :profession))
 
-(in-package :cyber-ranger)
+(in-package :holon.cyber-ranger)
 
 (defclass cyber-ranger (holon) ((profession :initarg :profession)))
 
@@ -12,5 +12,5 @@
                  :name rangers-name))
 
 
-(defvar I (new-cyber-ranger "collin"))
-(defvar collin I)
+;; different than the I in the holon package
+(defvar I (new-cyber-ranger "kuberlog"))
