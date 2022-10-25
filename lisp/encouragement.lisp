@@ -1,6 +1,7 @@
 (in-package :holon)
 
 (defparameter encouragements
+  ;; wow....... mega cool
   '((you got this bro)
     (nothing can stop you)
     (work like a machine)
