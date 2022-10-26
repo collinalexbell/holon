@@ -2,7 +2,8 @@
 (load "~/quicklisp/setup.lisp")
 (ql:quickload :parachute)
 
-;(in-package :holon)
+; (in-package :holon)
+;; anyone know how to run this only when sbcl is not in --script mode?
 
 (defun binary-search (l needle &optional lower upper)
   (let ((lower (if (null lower) 0 lower))
