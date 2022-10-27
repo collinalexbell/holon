@@ -14,5 +14,12 @@
 
 (query "SELECT * from files")
 
+(defmacro mk-table (name body)
+  `(query (:create-table ,name
+                         ,body)))
+
+;(mk-table 'daemons ((name :type string)
+;                    (purpose :type string)))
+
 ;(query "INSERT INTO files (name, language, loc) VALUES ('psql.lisp', 'lisp', 13)")
 ;(query "UPDATE files SET name='psql.lisp', language= 'lisp' ,loc=18")
