@@ -1,0 +1,13 @@
+2022-10-26 23:10:09.245 UTC [59005] LOG:  starting PostgreSQL 14.5 (Homebrew) on aarch64-apple-darwin21.6.0, compiled by Apple clang version 13.1.6 (clang-1316.0.21.2.5), 64-bit
+2022-10-26 23:10:09.246 UTC [59005] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-10-26 23:10:09.246 UTC [59005] LOG:  listening on IPv6 address "::1", port 5432
+2022-10-26 23:10:09.246 UTC [59005] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2022-10-26 23:10:09.248 UTC [59007] LOG:  database system was shut down at 2022-10-26 23:09:57 UTC
+2022-10-26 23:10:09.250 UTC [59005] LOG:  database system is ready to accept connections
+2022-10-26 23:10:23.029 UTC [59017] FATAL:  database "kuberlog" does not exist
+2022-10-26 23:10:53.617 UTC [59022] FATAL:  database "kuberlog" does not exist
+2022-10-26 23:12:53.628 UTC [59005] LOG:  could not open file "postmaster.pid": No such file or directory
+2022-10-26 23:12:53.629 UTC [59005] LOG:  performing immediate shutdown because data directory lock file is invalid
+2022-10-26 23:12:53.629 UTC [59005] LOG:  received immediate shutdown request
+2022-10-26 23:12:53.629 UTC [59005] LOG:  could not open file "postmaster.pid": No such file or directory
+2022-10-26 23:12:53.631 UTC [59005] LOG:  database system is shut down
