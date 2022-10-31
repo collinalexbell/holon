@@ -23,3 +23,6 @@ cd lisp
 (in-package :holon.task)
 (save-lisp-and-die "holon.task" :executable t)
 ```
+
+# checkin
+Oct 31: Tree Cybernetics Stream by @kuberlog the CyberRanger
