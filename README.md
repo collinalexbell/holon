@@ -24,5 +24,5 @@ cd lisp
 (save-lisp-and-die "holon.task" :executable t)
 ```
 
-# checkin
+# checkout
 Oct 31: Tree Cybernetics Stream by @kuberlog the CyberRanger
