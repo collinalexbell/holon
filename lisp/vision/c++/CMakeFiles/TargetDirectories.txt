@@ -1,0 +1,3 @@
+/Users/kuberlog/holon/lisp/vision/c++/CMakeFiles/Vision.dir
+/Users/kuberlog/holon/lisp/vision/c++/CMakeFiles/edit_cache.dir
+/Users/kuberlog/holon/lisp/vision/c++/CMakeFiles/rebuild_cache.dir
