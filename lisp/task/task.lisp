@@ -5,6 +5,7 @@
    (priority :accessor task-priority
 	     :initarg :priority
 	     :initform 0)
+   (xp :accessor task-xp :initarg :xp :initform 1)
    (groups :accessor task-groups
 	   :initarg :groups
 	   :initform 0)
@@ -16,11 +17,12 @@
 	   :initarg :parent
 	   :initform nil)))
 
-(defun new-task (item priority task-groups parent)
+(defun new-task (item priority task-groups parent &optional (xp 1000))
   (make-instance 'task
 		 :description item
 		 :priority priority
 		 :groups task-groups
+     :xp xp
 		 :parent parent))
 
 (defun subtasks (task)

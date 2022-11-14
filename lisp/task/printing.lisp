@@ -39,7 +39,7 @@
     (loop for task in (filter-tasks-by-group (inferior-holons *selected-task*) *selected-group*)
 	  for i from 0 to (length (inferior-holons *selected-task*))
 	  do (format t "~a) ~dXP: ~a ~%" i
-		     (task-priority task)
+		     (task-xp task)
 		     (task-description task)))))
 
 (defun print-current-groups ()
