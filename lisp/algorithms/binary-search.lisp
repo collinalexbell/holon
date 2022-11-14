@@ -2,24 +2,25 @@
 (load "~/quicklisp/setup.lisp")
 (ql:quickload :parachute)
 
-; (in-package :holon)
+(in-package :holon)
 ;; anyone know how to run this only when sbcl is not in --script mode?
 
 (defun binary-search (l needle &optional lower upper)
-  (let ((lower (if (null lower) 0 lower))
-        (upper (if (null upper) (length l) upper)))
-      (if ( <= (- upper lower) 1)
-       ;;base
-       (if (eql (nth lower l) needle)
-           lower
-           ;; else magic
-           -424242)
+  (let ((v (coerce l 'vector)))
+   (let ((lower (if (null lower) 0 lower))
+         (upper (if (null upper) (length l) upper)))
+     (if ( <= (- upper lower) 1)
+         ;;base
+         (if (eql (aref v lower) needle)
+             lower
+             ;; else magic
+             -424242)
 
                                         ;main case
-       (let ((pivot (+ (floor (/ (- upper lower) 2)) lower)))
-         (if (< needle (nth pivot l))
-             (binary-search l needle lower pivot)
-             (binary-search l needle pivot upper))))))
+         (let ((pivot (+ (floor (/ (- upper lower) 2)) lower)))
+           (if (< needle (aref v pivot))
+               (binary-search v needle lower pivot)
+               (binary-search v needle pivot upper)))))))
 
 
 ;; binary search needs sorted data duh
