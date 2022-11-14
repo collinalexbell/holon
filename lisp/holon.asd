@@ -26,7 +26,8 @@
                (:file "daemon/Daemon")
                (:file "daemon/daemons")
                (:file "behavioural-exceptions")
-               (:file "inner-conflict")))
+               (:file "inner-conflict")
+               (:file "vision/vision")))
 
 ;; (ql:quickload :holon) to install dependencies
 
