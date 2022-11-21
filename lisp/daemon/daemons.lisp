@@ -49,7 +49,7 @@
      (luxium .
       "Pixar lamp clone. Might make a great YouTube video")
      (steel-raven .
-      "A supercharged rubber ducky w/ RPi zero. Lame and generic")
+      "A supercharged rubber ducky w/ RPi zero. Train steel-raven to hack")
      (microdaemon .
       "A RPi Zero powered daemon robot that drives fast as fuck. Seems fun, if it were mouse sized")
      (daemon-10 .
