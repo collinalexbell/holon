@@ -17,6 +17,12 @@
 
 (defparameter *cpm* 1)
 
-(defun views-math (&optional (target 6000) (duration-days 30))
+(defun views-math (&optional
+                     ;;the number of dollars to achieve
+                     (target 6000)
+
+                     ;; duration-days is the number of days to achiev it
+                     (duration-days 30))
+
   (let ((total-views (* target 1000 *cpm*)))
     `(views per day ,(/ total-views duration-days) for ,target dollars in ,duration-days days)))
