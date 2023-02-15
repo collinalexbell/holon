@@ -27,20 +27,10 @@
                (:file "daemon/daemons")
                (:file "behavioural-exceptions")
                (:file "inner-conflict")
-               (:file "vision/vision")))
+               (:file "vision/vision")
+               (:file "change/change")))
 
-;; (ql:quickload :holon) to install dependencies
-
-
-;; how to load holon after booting
-; kuberlog
-; <password>
-; startx
-; cmd+d
 ; emacs
-; <enter>
-; c-x c-f /home/kuberlog/code/holon/lisp/holon.asd
-; slime
-; (asdf:load-system :holon)
-; 5 (on error)
+; slime into project dir
+; (load "init.lisp")
 
