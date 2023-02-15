@@ -17,7 +17,7 @@
 
 (defparameter *cpm* 1)
 
-(defun views-math (&optional
+(defun views-per-day-to-hit-target (&optional
                      ;;the number of dollars to achieve
                      (target 6000)
 
