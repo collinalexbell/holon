@@ -7,6 +7,5 @@
     (daemons . ())
     (pictures . ())
     (videos . ())
-    (technical-writing .())
-    (prose . ())
+    (writing .())
     (other-distributables . ())))
