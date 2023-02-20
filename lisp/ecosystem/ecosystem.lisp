@@ -3,9 +3,13 @@
 
 
 (defun holon-ecosystem ()
-  '((code . ())
+  '((code . (
+             (holon . "https://github.com/kuberlog/holon")
+             ))
     (daemons . ())
     (pictures . ())
     (videos . ())
-    (writing .())
+    (writing . (
+               (holon-book . "https://github.com/kuberlog/holon/blob/master/book/holon.md")
+               ))
     (other-distributables . ())))
