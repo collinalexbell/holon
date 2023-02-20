@@ -1,5 +1,5 @@
-(defpackage :holon.daemons (:use :cl :holon.Daemon) (:export name print-daemon products))
-(in-package :holon.daemons)
+(defpackage :holon.ecosystem (:use :cl :holon.Daemon) (:export name print-daemon products))
+(in-package :holon.ecosystem)
 
 (defun products ()
   (mapcar
