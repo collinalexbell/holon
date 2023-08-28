@@ -1,4 +1,0 @@
-cd lisp
-# this only works if holon.asd is in the asdf path
-# if not, then (asdf:load-asd "Users/<user>/<holon_path>/lisp/holon.asd") is required
-sbcl --eval '(asdf:load-system :holon)'

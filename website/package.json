@@ -1,8 +1,0 @@
-{
-    "description": "holon corporation site",
-    "repository": "https://github.com/kuberlog/holoncybernetics.com",
-    { "license" : "GPL-3.0-or-later" },
-    "dependencies": {
-        "express": "^4.17.1"
-    }
-}

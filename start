@@ -1,3 +1,0 @@
-./bootNode &
-sleep 10
-./bootReact &

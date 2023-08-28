@@ -1,7 +1,0 @@
-ant compile jar
-if [[ "$?" -ne 0 ]] ; then
-  echo 'could not build. exiting'; exit $rc
-fi
-java -cp "build/jar/Holon.jar:lib/*" \
--agentlib:jdwp=transport=dt_socket,address=127.0.0.1:50547,server=y,suspend=n \
-holon.shell.Shell
